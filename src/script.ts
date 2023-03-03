@@ -1,18 +1,20 @@
-export const script = [
+import { ScriptObj } from "./types/script";
+
+export const script: ScriptObj[] = [
   {
     name: "place_starting_pin",
     displayName: "Getting Started",
     scrollLocked: true,
     mapInteractions: ["drawPoint"],
     geojsonToRender: null,
-    flyToCoords: null,
+    flyToCoords: false,
     text: ["Place a pin on the Earth to get started."],
   },
   {
     name: "step2",
     displayName: "Point description",
     scrollLocked: false,
-    mapInteraction: ["drawPoint"],
+    mapInteractions: ["drawPoint"],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
