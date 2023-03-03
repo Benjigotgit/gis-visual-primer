@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { MapMain } from "./components/MapMain";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-function App() {
+export default () => {
   return (
-    <div className="App">
+    <div className="bg-purple-600 h-screen w-screen">
+      <MapMain></MapMain>
       <h1 className="bg-blue-500"> hi</h1>
     </div>
   );
-}
-
-export default App;
+};
