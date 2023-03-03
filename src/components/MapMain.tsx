@@ -6,9 +6,10 @@ import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
 
 export const MapMain = () => {
-  const [zoom, setZoom] = useState(9);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(2);
+  //starting coords are lofty hq
+  const [lng, setLng] = useState(-94.15727);
+  const [lat, setLat] = useState(36.07727);
 
   const map: MutableRefObject<Map | null> = useRef(null);
   const mapContainer: Ref<HTMLDivElement> = useRef(null);

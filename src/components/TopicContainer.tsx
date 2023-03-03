@@ -8,5 +8,5 @@ export const TopicContainer = () => {
 
   useEffect(() => {}, []);
 
-  return <div ref={mapContainer} className="map-container"></div>;
+  return <div></div>;
 };
