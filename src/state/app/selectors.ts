@@ -5,4 +5,4 @@ import { RootState } from "../store";
 
 export const appSelector = (state: RootState) => state[appReducerName];
 
-export const stepSelector = (state: RootState) => appSelector(state)[appSlice.name];
+export const appStateSelector = (state: RootState) => appSelector(state)[appSlice.name];

@@ -1,7 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import { useEffect, useState, useRef } from "react";
 import { useAppSelector } from "../state/hooks";
-import { stepSelector } from "../state/app/selectors";
+import { appStateSelector } from "../state/app/selectors";
 
 import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
@@ -20,7 +20,7 @@ export const MapMain = () => {
   const [lng, setLng] = useState(-94.15727);
   const [lat, setLat] = useState(36.07727);
   const [selectedGeojson, setSelectedGeojson] = useState(emptyFeatureCollection);
-  const { currStepIndex, currStepObj } = useAppSelector(stepSelector);
+  const { currStepIndex, currStepObj, sideNavOpen } = useAppSelector(appStateSelector);
 
   const map: MutableRefObject<Map | null> = useRef(null);
   const mapContainer: Ref<HTMLDivElement> = useRef(null);
@@ -35,14 +35,11 @@ export const MapMain = () => {
         zoom: zoom,
         accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
         interactive: true,
-        attributionControl: true,
-        logoPosition: "bottom-right",
+        attributionControl: false,
         scrollZoom: false,
       });
     }
-  }, []);
-
-  useEffect(() => {}, [currStepIndex]);
+  }, [sideNavOpen]);
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;
@@ -58,5 +55,16 @@ export const MapMain = () => {
     }
   };
 
-  return <div ref={mapContainer} className="w-screen h-screen fixed top-0 left-0"></div>;
+  return (
+    <>
+      <span className="fixed bottom-5 right-5 z-10">MAPBOX LOGO</span>
+      <div
+        className={`${
+          sideNavOpen ? "translate-x-28 scale-95" : ""
+        } transition duration-300 h-full w-full fixed top-0 left-0`}
+      >
+        <div ref={mapContainer} className={` w-full h-full `}></div>
+      </div>
+    </>
+  );
 };

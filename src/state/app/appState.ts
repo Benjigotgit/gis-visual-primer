@@ -1,20 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { script } from "../../script";
+import { AppState } from "../../types/state";
 
-const initialState = {
+const initialState: AppState = {
   currStepIndex: 0,
   currStepObj: script[0],
+  sideNavOpen: true,
 };
 
 export const appSlice = createSlice({
   initialState,
   name: "appState",
   reducers: {
-    setNextStep: (state, action: PayloadAction<number>) => {
+    setNextScript: (state, action: PayloadAction<number>) => {
       state.currStepIndex = action.payload;
       state.currStepObj = script[action.payload];
+    },
+    setSideNavOpen: (state, action: PayloadAction<boolean>) => {
+      console.log("ok", action.payload);
+      state.sideNavOpen = action.payload;
     },
   },
 });
 
-export const { setNextStep } = appSlice.actions;
+export const { setNextScript, setSideNavOpen } = appSlice.actions;

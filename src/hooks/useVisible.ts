@@ -19,10 +19,11 @@ export const useVisible = (ref: RefObject<HTMLElement>, cb?: (arg?: any) => any)
       }, ms);
     };
   };
+
   const activeObserver = useMemo(() => {
     return new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return setPosition(null);
       return debounce(() => {
+        if (!entry.isIntersecting) return setPosition(null);
         setPosition(entry.intersectionRect);
       }, 300)();
     });
@@ -31,14 +32,13 @@ export const useVisible = (ref: RefObject<HTMLElement>, cb?: (arg?: any) => any)
   useEffect(() => {
     if (!ref.current) return;
     visibilityObserver.observe(ref.current);
-
     return () => visibilityObserver.disconnect();
   }, [isIntersecting]);
 
   useEffect(() => {
     if (!ref.current) return;
     activeObserver.observe(ref.current);
-    if (cb) cb(position);
+    if (cb && position) cb(position);
     return () => activeObserver?.disconnect();
   }, [position]);
 

@@ -8,8 +8,10 @@ export interface AllState {
 export interface AppState {
   currStepIndex: number;
   currStepObj: ScriptObj;
+  sideNavOpen: boolean;
 }
 
 export enum AppStateActions {
-  SET_NEXT_STEP,
+  setNextScript,
+  setSideNavOpen,
 }

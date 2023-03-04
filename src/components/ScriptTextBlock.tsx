@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, Ref, useEffect, useRef, useState } from "react";
 import { useVisible } from "../hooks/useVisible";
 
 import { script } from "../script";
@@ -9,15 +9,15 @@ interface IScriptTextItem {
   index: number;
 }
 
-export const ScriptTextBlock = ({ item, index }: IScriptTextItem) => {
-  const ref = useRef(null);
+export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
+  const ref: Ref<HTMLDivElement> = useRef(null);
 
-  const handleEnterViewport = (isIntersecting: boolean) => {
-    console.log("handle Enter Viewport", index, isIntersecting);
+  const getActiveBlockPosition = (position: DOMRectReadOnly) => {
+    console.log("ref", ref.current?.offsetHeight);
+    console.log("position height", position.height);
   };
 
-  console.log("render");
-  useVisible(ref, handleEnterViewport);
+  useVisible(ref, getActiveBlockPosition);
 
   return (
     <div className="z-40 pointer-events-auto">
@@ -43,4 +43,4 @@ export const ScriptTextBlock = ({ item, index }: IScriptTextItem) => {
       <div className="bg-gradient-to-b from-blue-500 opacity-75 to-transparent w-screen h-8" />
     </div>
   );
-};
+});

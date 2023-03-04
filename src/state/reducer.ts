@@ -7,8 +7,5 @@ export const applicationReducer = combineReducers({
 });
 
 export const mainReducer = (state: any, action: { type: AppStateActions }) => {
-  if (action.type === AppStateActions.SET_NEXT_STEP) {
-    return applicationReducer(undefined, action);
-  }
   return applicationReducer(state, action);
 };

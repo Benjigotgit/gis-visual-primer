@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import { TopicContainer } from "./components/TopicContainer";
-import { SideNavMenu } from "./components/SideMenu";
+import { SideNavMenu } from "./components/SideNavMenu";
 import { store } from "./state/store";
 
 export default () => {
@@ -12,9 +12,7 @@ export default () => {
       <div className="h-screen w-screen flex flex-row z-10">
         <SideNavMenu></SideNavMenu>
         <TopicContainer></TopicContainer>
-        <div className="h-full w-full">
-          <MapMain></MapMain>
-        </div>
+        <MapMain></MapMain>
       </div>
     </Provider>
   );
