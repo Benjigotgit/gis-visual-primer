@@ -9,12 +9,12 @@ import { store } from "./state/store";
 export default () => {
   return (
     <Provider store={store}>
-      <div className="h-screen w-screen flex flex-row">
+      <div className="h-screen w-screen flex flex-row z-10">
         <SideNavMenu></SideNavMenu>
+        <TopicContainer></TopicContainer>
         <div className="h-full w-full">
           <MapMain></MapMain>
         </div>
-        <TopicContainer></TopicContainer>
       </div>
     </Provider>
   );

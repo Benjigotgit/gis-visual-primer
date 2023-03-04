@@ -16,7 +16,7 @@ export const SideNavMenu = () => {
 
   return (
     <div
-      className={`z-40 h-screen p-4 overflow-y-auto transition-transform bg-white w-60 dark:bg-gray-800 ${
+      className={`z-50 h-screen p-4 overflow-y-auto transition-transform bg-white w-60 dark:bg-gray-800 ${
         !open && "-translate-x-36"
       }`}
       onClick={onOpen}

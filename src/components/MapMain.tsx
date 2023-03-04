@@ -37,6 +37,7 @@ export const MapMain = () => {
         interactive: true,
         attributionControl: true,
         logoPosition: "bottom-right",
+        scrollZoom: false,
       });
     }
   }, []);
@@ -57,5 +58,5 @@ export const MapMain = () => {
     }
   };
 
-  return <div ref={mapContainer} className="w-full h-full"></div>;
+  return <div ref={mapContainer} className="w-screen h-screen fixed top-0 left-0"></div>;
 };
