@@ -16,6 +16,7 @@ export const ScriptTextBlock = ({ item, index }: IScriptTextItem) => {
     console.log("handle Enter Viewport", index, isIntersecting);
   };
 
+  console.log("render");
   useVisible(ref, handleEnterViewport);
 
   return (

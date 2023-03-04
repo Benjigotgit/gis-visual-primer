@@ -11,21 +11,21 @@ export const useVisible = (ref: RefObject<HTMLElement>, cb?: (arg?: any) => any)
   }, [isIntersecting]);
 
   const debounce = (fn: (...args: any) => any, ms = 50) => {
-    let timeoutId = null;
-    return (...args) => {
-      window.clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(() => {
-        fn.apply(null, args);
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return (...args: any) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        fn(null, args);
       }, ms);
     };
   };
   const activeObserver = useMemo(() => {
-    return new IntersectionObserver(([entry]) =>
-      debounce(() => {
-        if (!entry.isIntersecting) return setPosition(null);
+    return new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return setPosition(null);
+      return debounce(() => {
         setPosition(entry.intersectionRect);
-      }, 100)()
-    );
+      }, 300)();
+    });
   }, [position]);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ export const useVisible = (ref: RefObject<HTMLElement>, cb?: (arg?: any) => any)
   useEffect(() => {
     if (!ref.current) return;
     activeObserver.observe(ref.current);
+    if (cb) cb(position);
     return () => activeObserver?.disconnect();
   }, [position]);
 
