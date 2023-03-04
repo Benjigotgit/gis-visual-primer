@@ -16,8 +16,8 @@ export const SideNavMenu = () => {
 
   return (
     <div
-      className={`z-50 h-screen p-4 overflow-y-auto transition-transform bg-white w-60 dark:bg-gray-800 ${
-        !open && "-translate-x-36"
+      className={`fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition duration-300 ease-out bg-white w-60 dark:bg-gray-800 ${
+        !open && "-translate-x-44"
       }`}
       onClick={onOpen}
       tabIndex={0}
@@ -29,7 +29,7 @@ export const SideNavMenu = () => {
         className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
       >
         <svg
-          className="w-5 h-5 mr-2"
+          className="w-5 h-5"
           // aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -49,7 +49,10 @@ export const SideNavMenu = () => {
         onClick={onClose}
         className="text-gray-400 relative bg-transparent hover:bg-gray-200 hover:text-gray-900 float-right hover:cursor-pointer z-50 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
       >
-        {open ? <MdKeyboardArrowLeft size={25} /> : <MdKeyboardArrowRight size={25} />}
+        <MdKeyboardArrowLeft
+          size={25}
+          className={`transition duration-300 ease-out ${open ? "rotate-180" : ""}`}
+        />
       </button>
       <ul className="flex flex-col justify-start w-full items-center">
         {script.map((item, i) => {
@@ -58,7 +61,9 @@ export const SideNavMenu = () => {
               key={item.displayName + i}
               className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
             >
-              <p className="text-slate-200">{item.displayName}</p>
+              <p className="text-slate-200">
+                {i + 1}. {item.displayName}
+              </p>
             </li>
           );
         })}

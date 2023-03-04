@@ -14,7 +14,7 @@ export const TopicContainer = () => {
     <ul className="absolute top-0 h-fit pointer-events-none overflow-scroll flex flex-col z-10">
       {script.map((item, index) => (
         <>
-          <div className="z-40 h-[75vh] pointer-events-none"></div>
+          <div className="z-40 h-[75vh] pointer-events-none" />
           <div key={index} className="z-40 pointer-events-auto">
             <div className="bg-gradient-to-t opacity-75 text-center from-blue-500 to-transparent w-screen h-8 " />
             <div
