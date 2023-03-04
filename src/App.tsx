@@ -11,7 +11,7 @@ export default () => {
     <Provider store={store}>
       <div className="h-screen w-screen flex flex-row">
         <SideNavMenu></SideNavMenu>
-        <div className="h-full w-full -z-50">
+        <div className="h-full w-full">
           <MapMain></MapMain>
         </div>
         <TopicContainer></TopicContainer>

@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import mapboxgl from "mapbox-gl";
+import { useState, useRef } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { script } from "../script";
+
 export const SideNavMenu = () => {
   const drawer = useRef(null);
   const [open, setOpen] = useState(true);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
 
   const onClose = () => {
     setOpen(false);
@@ -52,6 +51,18 @@ export const SideNavMenu = () => {
       >
         {open ? <MdKeyboardArrowLeft size={25} /> : <MdKeyboardArrowRight size={25} />}
       </button>
+      <ul className="flex flex-col justify-start w-full items-center">
+        {script.map((item, i) => {
+          return (
+            <li
+              key={item.displayName + i}
+              className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
+            >
+              <p className="text-slate-200">{item.displayName}</p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

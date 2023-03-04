@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useAppSelector } from "../state/hooks";
 import { stepSelector } from "../state/app/selectors";
 
-import "./mb-style.css";
 import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
 import type { ScriptObj } from "../types/script";
@@ -35,6 +34,9 @@ export const MapMain = () => {
         center: [lng, lat],
         zoom: zoom,
         accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
+        interactive: true,
+        attributionControl: true,
+        logoPosition: "bottom-right",
       });
     }
   }, []);
@@ -55,5 +57,5 @@ export const MapMain = () => {
     }
   };
 
-  return <div ref={mapContainer} className="map-container"></div>;
+  return <div ref={mapContainer} className="w-full h-full"></div>;
 };
