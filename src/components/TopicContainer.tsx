@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { script } from "../script";
 import { ScriptTextBlock } from "./ScriptTextBlock";
 
@@ -8,7 +7,7 @@ export const TopicContainer = () => {
       {script.map((item, index) => (
         <li key={`${index}-${Math.random()}`}>
           <section>
-            <div className="z-40 h-[100vh] pointer-events-none" />
+            <div className="z-40 h-[75vh] pointer-events-none" />
             <div className="z-40 pointer-events-auto">
               <ScriptTextBlock
                 key={index + item.name}

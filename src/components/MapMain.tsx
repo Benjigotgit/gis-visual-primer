@@ -15,10 +15,10 @@ export const emptyFeatureCollection: FeatureCollection<any> = {
 };
 
 export const MapMain = () => {
-  const [zoom, setZoom] = useState(2);
+  const [zoom, setZoom] = useState(1);
   //starting coords are lofty hq
-  const [lng, setLng] = useState(-94.15727);
-  const [lat, setLat] = useState(36.07727);
+  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState(0);
   const [selectedGeojson, setSelectedGeojson] = useState(emptyFeatureCollection);
   const { currStepIndex, currStepObj, sideNavOpen } = useAppSelector(appStateSelector);
 
@@ -37,6 +37,11 @@ export const MapMain = () => {
         interactive: true,
         attributionControl: false,
         scrollZoom: false,
+      });
+      map.current.flyTo({
+        center: [-94.15727, 36.07727],
+        duration: 1500,
+        zoom: 2.2,
       });
     }
   }, [sideNavOpen]);
@@ -61,7 +66,7 @@ export const MapMain = () => {
       <div
         className={`${
           sideNavOpen ? "translate-x-28 scale-95" : ""
-        } transition duration-300 h-full w-full fixed top-0 left-0`}
+        } transition ease-out duration-300 h-full w-full fixed top-0 left-0`}
       >
         <div ref={mapContainer} className={` w-full h-full `}></div>
       </div>
