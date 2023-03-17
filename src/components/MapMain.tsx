@@ -1,4 +1,4 @@
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { LngLat } from "mapbox-gl";
 import { useEffect, useState, useRef } from "react";
 import { useAppSelector } from "../state/hooks";
 import { appStateSelector } from "../state/app/selectors";
@@ -37,6 +37,7 @@ export const MapMain = () => {
         interactive: true,
         attributionControl: false,
         scrollZoom: false,
+        
       });
       map.current.flyTo({
         center: [-94.15727, 36.07727],
@@ -45,6 +46,19 @@ export const MapMain = () => {
       });
     }
   }, [sideNavOpen]);
+
+
+  useEffect(() => {
+if(map.current){
+  map.current.on('click',(e) => {
+    const lngLat = e.lngLat.toArray()
+
+    const marker1 = new mapboxgl.Marker()
+    .setLngLat(lngLat)
+    .addTo(map.current);
+  })
+}
+  },[map.current])
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;
