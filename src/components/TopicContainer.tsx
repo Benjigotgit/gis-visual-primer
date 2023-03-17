@@ -1,7 +1,10 @@
 import { script } from "../script";
 import { ScriptTextBlock } from "./ScriptTextBlock";
 
+
+
 export const TopicContainer = () => {
+
   return (
     <ul className="absolute top-0 h-fit pointer-events-none overflow-scroll flex flex-col z-10">
       {script.map((item, index) => (

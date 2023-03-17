@@ -1,6 +1,6 @@
 import mapboxgl, { LngLat } from "mapbox-gl";
 import { useEffect, useState, useRef } from "react";
-import { useAppSelector } from "../state/hooks";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { appStateSelector } from "../state/app/selectors";
 
 import type { Map } from "mapbox-gl";
@@ -8,6 +8,7 @@ import type { Ref, MutableRefObject } from "react";
 import type { ScriptObj } from "../types/script";
 import { bbox, FeatureCollection } from "@turf/turf";
 import { BBox2d } from "@turf/helpers/dist/js/lib/geojson";
+import { setNextScript } from "../state/app/appState";
 
 export const emptyFeatureCollection: FeatureCollection<any> = {
   type: "FeatureCollection",
@@ -15,6 +16,7 @@ export const emptyFeatureCollection: FeatureCollection<any> = {
 };
 
 export const MapMain = () => {
+  const dispatch = useAppDispatch()
   const [zoom, setZoom] = useState(1);
   //starting coords are lofty hq
   const [lng, setLng] = useState(0);
@@ -44,21 +46,77 @@ export const MapMain = () => {
         duration: 1500,
         zoom: 2.2,
       });
+    } else {
+ 
     }
+
   }, [sideNavOpen]);
 
 
   useEffect(() => {
+ 
 if(map.current){
-  map.current.on('click',(e) => {
-    const lngLat = e.lngLat.toArray()
+   
 
-    const marker1 = new mapboxgl.Marker()
-    .setLngLat(lngLat)
-    .addTo(map.current);
+
+  map.current.on('click', (e) => {
+      scrollTo(
+      currStepObj.scriptScroll
+      )
+      dispatch(setNextScript(currStepIndex + 1))
+  
   })
+
+  // if (currStepIndex === 1){
+  //   map.current.setProjection('equalEarth')
+  // }
+
+  // if (currStepIndex === 2){
+  //   map.current.setProjection('mercator')
+  // }
 }
-  },[map.current])
+  }, [currStepIndex])
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 100,
+      behavior: "smooth",
+    })
+    if(map.current){
+      
+      const marker1 = new mapboxgl.Marker()
+      .setLngLat([-94.15727, 36.07727])
+      .addTo(map.current);
+
+      
+    }
+  }, [])
+
+
+useEffect(() => {
+  addEventListener('scroll', () => {
+    console.log(window.scrollY)
+    if (map.current){
+      if (window.scrollY < 800 ){
+        map.current.setProjection('globe')
+    
+      } 
+    if (window.scrollY > 800 && window.scrollY < 1200){
+        map.current.setProjection('mercator')
+    
+      } 
+
+      if(window.scrollY > 1200){
+        map.current.setProjection('equalEarth')
+
+      }
+    }
+  })
+
+
+
+}, [])
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;

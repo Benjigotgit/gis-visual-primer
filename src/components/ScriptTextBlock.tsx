@@ -17,7 +17,7 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
     console.log("position height", position.height);
   };
 
-  useVisible(ref, getActiveBlockPosition);
+  // useVisible(ref, getActiveBlockPosition);
 
   return (
     <div className="z-40 pointer-events-auto">
