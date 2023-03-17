@@ -10,6 +10,7 @@ export const TopicContainer = () => {
             <div className="z-40 h-[75vh] pointer-events-none" />
             <div className="z-40 pointer-events-auto">
               <ScriptTextBlock
+                id={`text-block-${index}`}
                 key={index + item.name}
                 item={item}
                 index={index}
