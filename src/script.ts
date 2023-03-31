@@ -71,9 +71,10 @@ export const script: ScriptObj[] = [
     scrollLocked: false,
     mapInteractions: ['setBaseMap'],
     geojsonToRender: null,
+    mapInteractionArgs: 'outdoors-v12',
     flyToCoords: false,
     text: [
-
+'The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.'
     ],
     // scriptScroll: {
     //   top: 2400,
@@ -85,16 +86,17 @@ export const script: ScriptObj[] = [
     name: "step6",
     displayName: "Point Description",
     scrollLocked: false,
-    mapInteractions: [],
+    mapInteractions: ['setBaseMap'],
+    mapInteractionArgs: 'satellite-streets-v12',
     geojsonToRender: null,
     flyToCoords: false,
     text: [
 
     ],
-    scriptScroll: {
-      top: 2400,
-      left: 100,
-      behavior: "smooth",
-    }
+    // scriptScroll: {
+    //   top: 2400,
+    //   left: 100,
+    //   behavior: "smooth",
+    // }
   },
 ];

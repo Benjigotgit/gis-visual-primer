@@ -6,6 +6,7 @@ import { scriptFuncs } from "../scriptFuncs";
 import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
 import type { ScriptObj } from "../types/script";
+import { script } from "../script";
 import { bbox, FeatureCollection } from "@turf/turf";
 import { BBox2d } from "@turf/helpers/dist/js/lib/geojson";
 import { setNextScript } from "../state/app/appState";
@@ -55,6 +56,10 @@ export const MapMain = () => {
 
   useEffect(() => {
  
+    if(
+      script.length >= currStepIndex + 1
+     )
+      {   
 if(map.current){
    
   if (currStepObj.scriptScroll){
@@ -65,8 +70,7 @@ if(map.current){
 
   map.current.on('click', (e) => {
 
-  
-      
+ 
       dispatch(setNextScript(currStepIndex + 1))
   
   })
@@ -78,6 +82,7 @@ if(map.current){
   })
 
 }
+      }
   }, [currStepIndex])
 
   useEffect(() => {

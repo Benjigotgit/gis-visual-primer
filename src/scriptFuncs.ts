@@ -37,9 +37,13 @@ export const scriptFuncs = {
           }
         
     },
-    'setBaseMap': (map) => {
+    'setBaseMap': (map, currStepObj) => {
 
-        map.setStyle('mapbox://styles/mapbox/outdoors-v12')
+
+        if(currStepObj.mapInteractionArgs !== ''){
+            map.setStyle('mapbox://styles/mapbox/' + currStepObj.mapInteractionArgs)
+
+        }
 
     }
 }

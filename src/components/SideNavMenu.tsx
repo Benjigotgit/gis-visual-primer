@@ -50,7 +50,7 @@ export const SideNavMenu = () => {
               key={item.displayName + i}
               className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
             >
-              <a className={`text-slate-200 ${
+              <p className={`text-slate-200 ${
             currStepIndex === i ? "text-orange-400" : ""
           }`}
           onClick={() => {dispatch(setNextScript(i))}}
@@ -58,7 +58,7 @@ export const SideNavMenu = () => {
           
           >
                 {i + 1}. {item.displayName}
-              </a>
+              </p>
             </li>
           );
         })}
