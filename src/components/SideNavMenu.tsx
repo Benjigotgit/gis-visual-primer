@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { script } from "../script";
-import { setSideNavOpen } from "../state/app/appState";
+import { setSideNavOpen, setNextScript} from "../state/app/appState";
 import { appStateSelector } from "../state/app/selectors";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { AppStateActions } from "../types/state";
@@ -50,11 +50,15 @@ export const SideNavMenu = () => {
               key={item.displayName + i}
               className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
             >
-              <p className={`text-slate-200 ${
+              <a className={`text-slate-200 ${
             currStepIndex === i ? "text-orange-400" : ""
-          }`}>
+          }`}
+          onClick={() => {dispatch(setNextScript(i))}}
+
+          
+          >
                 {i + 1}. {item.displayName}
-              </p>
+              </a>
             </li>
           );
         })}

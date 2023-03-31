@@ -57,22 +57,24 @@ export const MapMain = () => {
  
 if(map.current){
    
-
+  if (currStepObj.scriptScroll){
+    scrollTo(
+      currStepObj.scriptScroll
+      )
+  }
 
   map.current.on('click', (e) => {
 
-    // if (currStepObj.scriptScroll){
-      scrollTo(
-        currStepObj.scriptScroll
-        )
-    // }
+  
       
       dispatch(setNextScript(currStepIndex + 1))
+  
+  })
+
   currStepObj.mapInteractions.forEach((interaction) => {
     scriptFuncs[interaction](map.current, currStepObj)
 
     
-  })
   })
 
 }
