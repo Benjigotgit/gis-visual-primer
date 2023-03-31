@@ -9,7 +9,7 @@ import { AppStateActions } from "../types/state";
 export const SideNavMenu = () => {
   const drawer = useRef(null);
   const dispatch = useAppDispatch();
-  const { sideNavOpen } = useAppSelector(appStateSelector);
+  const { sideNavOpen, currStepIndex } = useAppSelector(appStateSelector);
 
   const open = () => {
     dispatch(setSideNavOpen(!sideNavOpen));
@@ -17,7 +17,7 @@ export const SideNavMenu = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition duration-300 ease-out bg-white w-60 dark:bg-gray-800 ${
+      className={`fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition duration-300 ease-out  w-60 bg-gray-800 ${
         !sideNavOpen && "-translate-x-44"
       }`}
       tabIndex={0}
@@ -50,7 +50,9 @@ export const SideNavMenu = () => {
               key={item.displayName + i}
               className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
             >
-              <p className="text-slate-200">
+              <p className={`text-slate-200 ${
+            currStepIndex === i ? "text-orange-400" : ""
+          }`}>
                 {i + 1}. {item.displayName}
               </p>
             </li>

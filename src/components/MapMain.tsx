@@ -1,8 +1,8 @@
-import mapboxgl, { LngLat } from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import { useEffect, useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { appStateSelector } from "../state/app/selectors";
-
+import { scriptFuncs } from "../scriptFuncs";
 import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
 import type { ScriptObj } from "../types/script";
@@ -60,20 +60,21 @@ if(map.current){
 
 
   map.current.on('click', (e) => {
+
+    // if (currStepObj.scriptScroll){
       scrollTo(
-      currStepObj.scriptScroll
-      )
+        currStepObj.scriptScroll
+        )
+    // }
+      
       dispatch(setNextScript(currStepIndex + 1))
-  
+  currStepObj.mapInteractions.forEach((interaction) => {
+    scriptFuncs[interaction](map.current, currStepObj)
+
+    
+  })
   })
 
-  // if (currStepIndex === 1){
-  //   map.current.setProjection('equalEarth')
-  // }
-
-  // if (currStepIndex === 2){
-  //   map.current.setProjection('mercator')
-  // }
 }
   }, [currStepIndex])
 
@@ -83,40 +84,18 @@ if(map.current){
       left: 100,
       behavior: "smooth",
     })
-    if(map.current){
-      
-      const marker1 = new mapboxgl.Marker()
-      .setLngLat([-94.15727, 36.07727])
-      .addTo(map.current);
-
-      
-    }
   }, [])
 
 
-useEffect(() => {
-  addEventListener('scroll', () => {
-    console.log(window.scrollY)
-    if (map.current){
-      if (window.scrollY < 800 ){
-        map.current.setProjection('globe')
-    
-      } 
-    if (window.scrollY > 800 && window.scrollY < 1200){
-        map.current.setProjection('mercator')
-    
-      } 
-
-      if(window.scrollY > 1200){
-        map.current.setProjection('equalEarth')
-
-      }
-    }
-  })
+// useEffect(() => {
+//   addEventListener('scroll', () => {
+//     console.log(window.scrollY)
+  
+//   })
 
 
 
-}, [])
+// }, [])
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;

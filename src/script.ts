@@ -17,9 +17,9 @@ export const script: ScriptObj[] = [
   },
   {
     name: "step2",
-    displayName: "Point description",
+    displayName: "Latitude and Longitude",
     scrollLocked: false,
-    mapInteractions: ["drawPoint"],
+    mapInteractions: [],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
@@ -28,32 +28,64 @@ export const script: ScriptObj[] = [
       "What if you want to plot your coordinates on a flat map? Flat maps are called projections: stretched representations which represent the curvature of the Earth on a 2-dimensional map.",
     ],
     scriptScroll: {
-      top: 1600,
+      top: 1100,
       left: 100,
       behavior: "smooth",
     }
   },
   {
     name: "step3",
-    displayName: "Point description",
+    displayName: "Mercator Projection",
     scrollLocked: false,
-    mapInteractions: ["drawPoint"],
+    mapInteractions: ["setProjection"],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
 'Mercator projection system'
     ],
     scriptScroll: {
-      top: 2000,
+      top: 1300,
       left: 100,
       behavior: "smooth",
     }
   },
   {
     name: "step4",
-    displayName: "Point description",
+    displayName: "Equal Earth Projection",
     scrollLocked: false,
-    mapInteractions: ["drawPoint"],
+    mapInteractions: ['setProjection'],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+      "One common representation of Earth is called the Equal Earth projection. Equal Earth accurately reflects areas of geography, but shapes will be distorted at further distances North and South. To know where your pin is on this map, we need to use the same transformation used to stretch this map in the first place."
+    ],
+    scriptScroll: {
+      top: 1600,
+      left: 100,
+      behavior: "smooth",
+    }
+  },
+  {
+    name: "step5",
+    displayName: "BaseMaps",
+    scrollLocked: false,
+    mapInteractions: ['setBaseMap'],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+
+    ],
+    // scriptScroll: {
+    //   top: 2400,
+    //   left: 100,
+    //   behavior: "smooth",
+    // }
+  },
+  {
+    name: "step6",
+    displayName: "Point Description",
+    scrollLocked: false,
+    mapInteractions: [],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
