@@ -24,8 +24,12 @@ export const setMercatorProjLineLayer = (map: Map, data: GeoJSON.GeoJSON) => {
   }
 };
 export const setGlobeProjLineLayer = (map: Map, data: GeoJSON.GeoJSON) => {
+  console.log("ok");
   const src = map.getSource("latlng-globe-proj-linesrc");
+
   if (!src) {
+    console.log("noSource");
+
     map?.addSource("latlng-globe-proj-linesrc", {
       type: "geojson",
       data: data,

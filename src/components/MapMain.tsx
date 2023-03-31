@@ -7,9 +7,11 @@ import type { Map } from "mapbox-gl";
 import type { Ref, MutableRefObject } from "react";
 import type { ScriptObj } from "../types/script";
 import { script } from "../script";
-import { bbox, FeatureCollection } from "@turf/turf";
+import { bbox, FeatureCollection, point } from "@turf/turf";
 import { BBox2d } from "@turf/helpers/dist/js/lib/geojson";
 import { setNextScript } from "../state/app/appState";
+import { setGlobeProjLineLayer } from "../layers/lineLayer";
+import { northToSouthLine } from "../models/geojson";
 
 export const emptyFeatureCollection: FeatureCollection<any> = {
   type: "FeatureCollection",
@@ -77,20 +79,6 @@ export const MapMain = () => {
       console.log(window.scrollY);
     });
   }, []);
-
-  const handleNextStep = (obj: ScriptObj) => {
-    if (!map.current) return;
-    const { flyToCoords, geojsonToRender, mapInteractions } = obj;
-
-    if (flyToCoords) {
-      const bb = bbox(selectedGeojson) as BBox2d;
-      map.current.fitBounds(bb, {
-        duration: 800,
-        padding: 50,
-        zoom: 9,
-      });
-    }
-  };
 
   return (
     <>
