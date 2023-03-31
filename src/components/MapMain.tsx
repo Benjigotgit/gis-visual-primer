@@ -62,11 +62,6 @@ export const MapMain = () => {
       {   
 if(map.current){
    
-  if (currStepObj.scriptScroll){
-    scrollTo(
-      currStepObj.scriptScroll
-      )
-  }
 
   map.current.on('click', (e) => {
 
@@ -94,15 +89,15 @@ if(map.current){
   }, [])
 
 
-// useEffect(() => {
-//   addEventListener('scroll', () => {
-//     console.log(window.scrollY)
+useEffect(() => {
+  addEventListener('scroll', () => {
+    console.log(window.scrollY)
   
-//   })
+  })
 
 
 
-// }, [])
+}, [])
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;

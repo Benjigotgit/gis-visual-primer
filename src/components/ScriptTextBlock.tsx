@@ -1,7 +1,5 @@
 import { memo, Ref, useEffect, useRef, useState } from "react";
-import { useVisible } from "../hooks/useVisible";
 
-import { script } from "../script";
 import type { ScriptObj } from "../types/script";
 
 interface IScriptTextItem {
@@ -33,7 +31,7 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
                 key={`${textIndex}-${Math.random()}`}
                 className={`${
                   textIndex !== item.text.length - 1 ? "mb-10" : ""
-                } "text-center w-1/2`}
+                } "text-center w-1/2 text-white`}
               >
                 {text}
               </p>
