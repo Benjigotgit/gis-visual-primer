@@ -9,7 +9,12 @@ export const script: ScriptObj[] = [
     geojsonToRender: null,
     flyToCoords: false,
     text: ["Click map to get started."],
-  
+
+    scriptScroll: {
+      top: 800,
+      left: 100,
+      behavior: "smooth",
+    },
   },
   {
     name: "step2",
@@ -23,7 +28,14 @@ export const script: ScriptObj[] = [
       "Latitude and longitude measure positions on our spherical Earth. Combined, these two measurements make up the geographic coordinate system",
       "What if you want to plot your coordinates on a flat map? Flat maps are called projections: stretched representations which represent the curvature of the Earth on a 2-dimensional map.",
     ],
-  
+
+    scriptScroll: {
+      top: 1600,
+      left: 100,
+      behavior: "smooth",
+    },
+    layer: "latlng-globe-proj-line",
+    layerSource: "latlng-globe-proj-linesrc",
   },
   {
     name: "step3",
@@ -32,47 +44,52 @@ export const script: ScriptObj[] = [
     mapInteractions: ["setProjection"],
     geojsonToRender: null,
     flyToCoords: false,
-    text: [
-'Mercator projection system'
-    ],
+    text: ["Mercator projection system"],
 
+    scriptScroll: {
+      top: 2000,
+      left: 100,
+      behavior: "smooth",
+    },
+    layer: "latlng-mercator-proj-line",
+    layerSource: "latlng-mercator-proj-linesrc",
   },
   {
     name: "step4",
     displayName: "Equal Earth Projection",
     scrollLocked: false,
-    mapInteractions: ['setProjection'],
+    mapInteractions: ["setProjection"],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-      "One common representation of Earth is called the Equal Earth projection. Equal Earth accurately reflects areas of geography, but shapes will be distorted at further distances North and South. To know where your pin is on this map, we need to use the same transformation used to stretch this map in the first place."
+      "One common representation of Earth is called the Equal Earth projection. Equal Earth accurately reflects areas of geography, but shapes will be distorted at further distances North and South. To know where your pin is on this map, we need to use the same transformation used to stretch this map in the first place.",
     ],
-
   },
   {
     name: "step5",
     displayName: "BaseMaps",
     scrollLocked: false,
-    mapInteractions: ['setBaseMap'],
+    mapInteractions: ["setBaseMap"],
     geojsonToRender: null,
-    mapInteractionArgs: 'outdoors-v12',
+    mapInteractionArgs: "outdoors-v12",
     flyToCoords: false,
     text: [
-'The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.'
+      "The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.",
     ],
-   
   },
   {
     name: "step6",
     displayName: "Point Description",
     scrollLocked: false,
-    mapInteractions: ['setBaseMap'],
-    mapInteractionArgs: 'satellite-streets-v12',
+    mapInteractions: ["setBaseMap"],
+    mapInteractionArgs: "satellite-streets-v12",
     geojsonToRender: null,
     flyToCoords: false,
-    text: [
-
-    ],
-   
+    text: [],
+    scriptScroll: {
+      top: 2400,
+      left: 100,
+      behavior: "smooth",
+    },
   },
 ];

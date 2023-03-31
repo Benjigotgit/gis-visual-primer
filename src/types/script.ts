@@ -1,3 +1,5 @@
+import type { LayerId, LayerSource } from "./layersAndSources";
+
 export interface ScriptObj {
   name: string;
   displayName: string;
@@ -6,4 +8,6 @@ export interface ScriptObj {
   geojsonToRender: any;
   flyToCoords: boolean;
   text: string[];
+  layer?: LayerId;
+  layerSource?: LayerSource;
 }

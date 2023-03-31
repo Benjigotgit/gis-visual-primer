@@ -17,7 +17,7 @@ export const emptyFeatureCollection: FeatureCollection<any> = {
 };
 
 export const MapMain = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [zoom, setZoom] = useState(1);
   //starting coords are lofty hq
   const [lng, setLng] = useState(0);
@@ -40,7 +40,6 @@ export const MapMain = () => {
         interactive: true,
         attributionControl: false,
         scrollZoom: false,
-        
       });
       map.current.flyTo({
         center: [-94.15727, 36.07727],
@@ -48,56 +47,36 @@ export const MapMain = () => {
         zoom: 2.2,
       });
     } else {
- 
     }
-
   }, [sideNavOpen]);
 
-
   useEffect(() => {
- 
-    if(
-      script.length >= currStepIndex + 1
-     )
-      {   
-if(map.current){
-   
+    if (script.length >= currStepIndex + 1) {
+      if (map.current) {
+        map.current.on("click", (e) => {
+          dispatch(setNextScript(currStepIndex + 1));
+        });
 
-  map.current.on('click', (e) => {
-
- 
-      dispatch(setNextScript(currStepIndex + 1))
-  
-  })
-
-  currStepObj.mapInteractions.forEach((interaction) => {
-    scriptFuncs[interaction](map.current, currStepObj)
-
-    
-  })
-
-}
+        currStepObj.mapInteractions.forEach((interaction) => {
+          scriptFuncs[interaction](map.current, currStepObj);
+        });
       }
-  }, [currStepIndex])
+    }
+  }, [currStepIndex]);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 100,
       behavior: "smooth",
-    })
-  }, [])
+    });
+  }, []);
 
-
-useEffect(() => {
-  addEventListener('scroll', () => {
-    console.log(window.scrollY)
-  
-  })
-
-
-
-}, [])
+  useEffect(() => {
+    addEventListener("scroll", () => {
+      console.log(window.scrollY);
+    });
+  }, []);
 
   const handleNextStep = (obj: ScriptObj) => {
     if (!map.current) return;
