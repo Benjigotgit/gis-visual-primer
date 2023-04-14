@@ -23,10 +23,10 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
 
   return (
     <div className="z-40 pointer-events-auto">
-      <div className="bg-gradient-to-t opacity-75 text-center from-blue-500 to-transparent w-screen h-8 " />
+      <div className="bg-gradient-to-t opacity-75 text-center from-[#A020F0] to-transparent w-screen h-8 " />
       <div
         ref={ref}
-        className="h-fit text-center py-8 bg-opacity-75 flex flex-col items-center justify-evenly  bg-blue-500 w-screen z-10"
+        className="h-fit text-center py-8 bg-opacity-75 flex flex-col items-center justify-evenly  bg-[#A020F0] w-screen z-10"
       >
         
               <p
@@ -36,7 +36,7 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
               </p>
           
       </div>
-      <div className="bg-gradient-to-b from-blue-500 opacity-75 to-transparent w-screen h-8" />
+      <div className="bg-gradient-to-b from-[#A020F0] opacity-75 to-transparent w-screen h-8" />
     </div>
   );
 });
