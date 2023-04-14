@@ -13,10 +13,13 @@ export const appSlice = createSlice({
   name: "appState",
   reducers: {
     setNextScript: (state, action: PayloadAction<number>) => {
-    
-      
-          state.currStepIndex = action.payload;
-          state.currStepObj = script[action.payload];
+      try{
+        state.currStepIndex = action.payload;
+        state.currStepObj = script[action.payload];
+      } catch {
+        
+      }
+        
     },
     setSideNavOpen: (state, action: PayloadAction<boolean>) => {
       console.log("ok", action.payload);

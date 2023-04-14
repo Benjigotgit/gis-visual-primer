@@ -1,6 +1,6 @@
-import { memo, Ref, useEffect, useRef, useState } from "react";
+import { memo, Ref,  useRef } from "react";
 import { appStateSelector } from "../state/app/selectors";
-import { useAppDispatch, useAppSelector } from "../state/hooks";
+import { useAppSelector } from "../state/hooks";
 
 import type { ScriptObj } from "../types/script";
 
@@ -12,8 +12,7 @@ interface IScriptTextItem {
 export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
   const ref: Ref<HTMLDivElement> = useRef(null);
 
-  const dispatch = useAppDispatch();
-  const { sideNavOpen, currStepIndex, currStepObj } = useAppSelector(appStateSelector);
+  const {  currStepObj } = useAppSelector(appStateSelector);
 
   const getActiveBlockPosition = (position: DOMRectReadOnly) => {
     console.log("ref", ref.current?.offsetHeight);
@@ -31,10 +30,9 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
       >
         
               <p
-                // key={`${textIndex}-${Math.random()}`}
-                className= "text-center w-1/2 text-white"
+                className= "text-center w-1/2 text-white mb-10"
               >
-                {currStepObj.text}
+                {currStepObj ? currStepObj.text : ''}
               </p>
           
       </div>

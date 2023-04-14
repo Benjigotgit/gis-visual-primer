@@ -1,4 +1,4 @@
-import mapboxgl, { LngLat } from "mapbox-gl";
+import mapboxgl, { LngLat, } from "mapbox-gl";
 
 export const scriptFuncs = {
 
