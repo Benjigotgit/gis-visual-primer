@@ -1,4 +1,6 @@
 import { memo, Ref, useEffect, useRef, useState } from "react";
+import { appStateSelector } from "../state/app/selectors";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
 
 import type { ScriptObj } from "../types/script";
 
@@ -9,6 +11,9 @@ interface IScriptTextItem {
 
 export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
   const ref: Ref<HTMLDivElement> = useRef(null);
+
+  const dispatch = useAppDispatch();
+  const { sideNavOpen, currStepIndex, currStepObj } = useAppSelector(appStateSelector);
 
   const getActiveBlockPosition = (position: DOMRectReadOnly) => {
     console.log("ref", ref.current?.offsetHeight);
@@ -24,19 +29,14 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
         ref={ref}
         className="h-fit text-center py-8 bg-opacity-75 flex flex-col items-center justify-evenly  bg-blue-500 w-screen z-10"
       >
-        {item.text.length !== 0 &&
-          item.text.map((text, textIndex) => {
-            return (
+        
               <p
-                key={`${textIndex}-${Math.random()}`}
-                className={`${
-                  textIndex !== item.text.length - 1 ? "mb-10" : ""
-                } "text-center w-1/2 text-white`}
+                // key={`${textIndex}-${Math.random()}`}
+                className= "text-center w-1/2 text-white"
               >
-                {text}
+                {currStepObj.text}
               </p>
-            );
-          })}
+          
       </div>
       <div className="bg-gradient-to-b from-blue-500 opacity-75 to-transparent w-screen h-8" />
     </div>
