@@ -25,18 +25,30 @@ export const script: ScriptObj[] = [
   },
   {
     name: "step3",
+    displayName: "Projections",
+    scrollLocked: false,
+    mapInteractions: [],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+      "What if you want to plot your coordinates on a flat surface map? Projections are used to represent the curvature of the globe as a 2-dimensional map. There are many different types of projections that are used in specific cases, depending on the location and map medium (print vs web).",
+    ],
+  
+  },
+  {
+    name: "step4",
     displayName: "Mercator Projection",
     scrollLocked: false,
     mapInteractions: ["setProjection"],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-'Mercator projection system. The Mercator projection system is often used for navigation.'
+'The Mercator projection system is often used for navigation. Web mercator is used for web maps!'
     ],
 
   },
   {
-    name: "step4",
+    name: "step5",
     displayName: "Equal Earth Projection",
     scrollLocked: false,
     mapInteractions: ['setProjection'],
@@ -48,63 +60,75 @@ export const script: ScriptObj[] = [
 
   },
   {
-    name: "step5",
-    displayName: "BaseMaps",
+    name: "step6",
+    displayName: "Basemaps",
+    scrollLocked: false,
+    mapInteractions: ['setBaseMap'],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+'The underlying background of a map is called the basemap. They serve as a base reference for you to overlay other layers of data on top of.'
+    ],
+   
+  },
+  {
+    name: "step7",
+    displayName: "Outdoor Basemap",
     scrollLocked: false,
     mapInteractions: ['setBaseMap'],
     geojsonToRender: null,
     mapInteractionArgs: 'outdoors-v12',
     flyToCoords: false,
     text: [
-'The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.'
+'Basemaps can include geographical references such terrain, or manmade references such as streets. This basemap features wilderness locations as a resource for outdoor activities.'
     ],
    
   },
   {
-    name: "step6",
-    displayName: "Point Description",
+    name: "step8",
+    displayName: "Satellite Imagery Basemap",
     scrollLocked: false,
     mapInteractions: ['setBaseMap'],
     mapInteractionArgs: 'satellite-streets-v12',
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-      'The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.'
+      'Here is an example of a satellite imagery basemap.'
 
     ],
    
   },
   {
-    name: "step7",
-    displayName: "Polygons",
+    name: "step9",
+    displayName: "Vector & Raster Data",
     scrollLocked: false,
     mapInteractions: ['drawPolygon', ],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-'Basemaps are great, but what if we want to see additional information on the map? Maybe we want to see how much it cost each country to host the World Cup or what the temperature is in every square mile in Arkansas.'
+'Basemaps are great, but what if we want to see additional information on the map? Maybe we want to see how much it cost each country to host the World Cup or what the temperature is in every square mile in Arkansas. We can add different types of data to a map, such as vector or raster layers. Lets explore each kind!'
     ],
    
   },
   {
-    name: "step8",
-    displayName: "Raster Layers",
-    scrollLocked: false,
-    mapInteractions: [ ],
-    geojsonToRender: null,
-    flyToCoords: false,
-    text: [
-    ],
-   
-  },
-  {
-    name: "step9",
+    name: "step10",
     displayName: "Vector Layers",
     scrollLocked: false,
     mapInteractions: [ ],
     geojsonToRender: null,
     flyToCoords: false,
-    text: [
+    text: [ 'Vector data includes points, lines and polygons.'
+    ],
+   
+  },
+  {
+    name: "step11",
+    displayName: "Raster Layers",
+    scrollLocked: false,
+    mapInteractions: [ ],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [ 'Raster data includes any pixelated/grid data where each pixel represents a different geographic location and unique data value.'
     ],
    
   },
