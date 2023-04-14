@@ -5,6 +5,14 @@ export const scriptFuncs = {
 
     'drawPoint': (map) => {
 
+
+        map.flyTo({
+            center:   [  -91.20030444282527,
+                32.97243392969706],
+            duration: 1500,
+            zoom: 3.2,
+          });
+
         const marker1 = new mapboxgl.Marker({
             color:'#A020F0'
         })
@@ -170,8 +178,8 @@ export const scriptFuncs = {
     
     
                 map.flyTo({
-                    center:   [  -91.20030444282527,
-                        32.97243392969706],
+                    center:   [   -94.60745018298526,
+                        36.507038565628505],
                     duration: 1500,
                     zoom: 6.2,
                   });

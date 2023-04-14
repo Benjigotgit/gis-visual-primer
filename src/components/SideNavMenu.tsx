@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useRef } from "react";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 import { script } from "../script";
 import { setSideNavOpen, setNextScript} from "../state/app/appState";
 import { appStateSelector } from "../state/app/selectors";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
-import { AppStateActions } from "../types/state";
 
 export const SideNavMenu = () => {
   const drawer = useRef(null);
