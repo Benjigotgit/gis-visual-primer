@@ -1,11 +1,21 @@
-import mapboxgl, { LngLat } from "mapbox-gl";
+import mapboxgl, { LngLat, } from "mapbox-gl";
 
 export const scriptFuncs = {
 
 
     'drawPoint': (map) => {
 
-        const marker1 = new mapboxgl.Marker()
+
+        map.flyTo({
+            center:   [  -91.20030444282527,
+                32.97243392969706],
+            duration: 1500,
+            zoom: 3.2,
+          });
+
+        const marker1 = new mapboxgl.Marker({
+            color:'#A020F0'
+        })
         .setLngLat([-94.15727, 36.07727])
         .addTo(map);
   
@@ -13,6 +23,13 @@ export const scriptFuncs = {
     },
 
     'setProjection': (map, currStepObj) => {
+
+        map.flyTo({
+            center:   [   -94.60745018298526,
+                36.507038565628505],
+            duration: 1500,
+            zoom: 1.6,
+          });
 
         if (map){
          
@@ -47,49 +64,105 @@ export const scriptFuncs = {
 
     },
     'drawPolygon': (map) => {
-        map.addSource('maine', {
-            'type': 'geojson',
-            'data': {
-            'type': 'Feature',
-            'geometry': {
-            'type': 'Polygon',
-            // These coordinates outline Maine.
-            'coordinates': [
-            [
-            [-67.13734, 45.13745],
-            [-66.96466, 44.8097],
-            [-68.03252, 44.3252],
-            [-69.06, 43.98],
-            [-70.11617, 43.68405],
-            [-70.64573, 43.09008],
-            [-70.75102, 43.08003],
-            [-70.79761, 43.21973],
-            [-70.98176, 43.36789],
-            [-70.94416, 43.46633],
-            [-71.08482, 45.30524],
-            [-70.66002, 45.46022],
-            [-70.30495, 45.91479],
-            [-70.00014, 46.69317],
-            [-69.23708, 47.44777],
-            [-68.90478, 47.18479],
-            [-68.2343, 47.35462],
-            [-67.79035, 47.06624],
-            [-67.79141, 45.70258],
-            [-67.13734, 45.13745]
-            ]
-            ]
-            }
-            }
-            });
-             
-            // Add a new layer to visualize the polygon.
-            map.addLayer({
-            'id': 'maine',
+
+        map.setStyle('mapbox://styles/mapbox/light-v11')
+
+        setTimeout(() => {
+            map.addSource('arkansas', {
+                'type': 'geojson',
+                'data': {
+                    
+                        "type": "FeatureCollection",
+                        "features": [
+                          {
+                            "type": "Feature",
+                            "properties": {},
+                            "geometry": {
+                              "coordinates": [
+                                [
+                                  [
+                                    -91.20030444282527,
+                                    32.97243392969706
+                                  ],
+                                  [
+                                    -91.13841664297293,
+                                    33.18943308273121
+                                  ],
+                                  [
+                                    -91.20182718443264,
+                                    33.387332518046904
+                                  ],
+                                  [
+                                    -91.14767405917821,
+                                    33.76475587911328
+                                  ],
+                                  [
+                                    -90.71888454510024,
+                                    34.324299290068424
+                                  ],
+                                  [
+                                    -89.68214673495058,
+                                    35.91026139684783
+                                  ],
+                                  [
+                                    -90.3919992419318,
+                                    35.95562374469044
+                                  ],
+                                  [
+                                    -90.03416547094123,
+                                    36.3142254927798
+                                  ],
+                                  [
+                                    -90.15525229483258,
+                                    36.467993527633965
+                                  ],
+                                  [
+                                    -94.60745018298526,
+                                    36.507038565628505
+                                  ],
+                                  [
+                                    -94.39749865982041,
+                                    35.423611488544154
+                                  ],
+                                  [
+                                    -94.49657143065964,
+                                    33.660123043653996
+                                  ],
+                                  [
+                                    -94.31892542469974,
+                                    33.614209849896426
+                                  ],
+                                  [
+                                    -94.07308322426191,
+                                    33.56767001462978
+                                  ],
+                                  [
+                                    -94.02106318183094,
+                                    33.02971240615334
+                                  ],
+                                  [
+                                    -91.20030444282527,
+                                    32.97243392969706
+                                  ]
+                                ]
+                              ],
+                              "type": "Polygon"
+                            }
+                          }
+                        ]
+                    }
+                
+                });
+    
+    
+    
+        map.addLayer({
+            'id': 'arkansas',
             'type': 'fill',
-            'source': 'maine', // reference the data source
+            'source': 'arkansas', // reference the data source
             'layout': {},
             'paint': {
-            'fill-color': '#0080ff', // blue color fill
+            'fill-color': '#A020F0', 
             'fill-opacity': 0.3
             }
             });
@@ -97,20 +170,29 @@ export const scriptFuncs = {
             map.addLayer({
             'id': 'outline',
             'type': 'line',
-            'source': 'maine',
+            'source': 'arkansas',
             'layout': {},
             'paint': {
-            'line-color': '#000',
-            'line-width': 2
+            'line-color': 'black',
+            'line-width': 1
             }
             });
-
-            map.flyTo({
-                center:   [-67.13734, 45.13745],
-                duration: 1500,
-                zoom: 6.2,
-              });
-    }
+    
+            
+                 
+                // Add a new layer to visualize the polygon.
+              
+    
+    
+                map.flyTo({
+                    center:   [   -94.60745018298526,
+                        36.507038565628505],
+                    duration: 1500,
+                    zoom: 6.2,
+                  });
+        
+        }, 1000)
+    }     
 }
 
 
