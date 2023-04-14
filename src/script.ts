@@ -19,9 +19,7 @@ export const script: ScriptObj[] = [
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-      "You placed a pin at 36.07727° latitude and -94.15727° longitude",
-      "Latitude and longitude measure positions on our spherical Earth. Combined, these two measurements make up the geographic coordinate system",
-      "What if you want to plot your coordinates on a flat map? Flat maps are called projections: stretched representations which represent the curvature of the Earth on a 2-dimensional map.",
+      "You placed a pin at 36.07727° latitude and -94.15727° longitude. Latitude and longitude measure positions on our spherical Earth. Combined, these two measurements make up the geographic coordinate system. What if you want to plot your coordinates on a flat map? Flat maps are called projections: stretched representations which represent the curvature of the Earth on a 2-dimensional map.",
     ],
   
   },
@@ -33,7 +31,7 @@ export const script: ScriptObj[] = [
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-'Mercator projection system'
+'Mercator projection system. The Mercator projection system is often used for navigation.'
     ],
 
   },
@@ -71,6 +69,7 @@ export const script: ScriptObj[] = [
     geojsonToRender: null,
     flyToCoords: false,
     text: [
+      'The actual background image of the projection is called a base map. It can include anything from roads, geography, color changes, and more.'
 
     ],
    
@@ -83,7 +82,29 @@ export const script: ScriptObj[] = [
     geojsonToRender: null,
     flyToCoords: false,
     text: [
-
+'Basemaps are great, but what if we want to see additional information on the map? Maybe we want to see how much it cost each country to host the World Cup or what the temperature is in every square mile in Arkansas.'
+    ],
+   
+  },
+  {
+    name: "step8",
+    displayName: "Raster Layers",
+    scrollLocked: false,
+    mapInteractions: [ ],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+    ],
+   
+  },
+  {
+    name: "step9",
+    displayName: "Vector Layers",
+    scrollLocked: false,
+    mapInteractions: [ ],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
     ],
    
   },

@@ -4,11 +4,12 @@ import { script } from "../script";
 import { setSideNavOpen, setNextScript} from "../state/app/appState";
 import { appStateSelector } from "../state/app/selectors";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
+import imageSvg from '../assets/image 3.svg'
 
 export const SideNavMenu = () => {
   const drawer = useRef(null);
   const dispatch = useAppDispatch();
-  const { sideNavOpen, currStepIndex } = useAppSelector(appStateSelector);
+  const { sideNavOpen,  currStepObj } = useAppSelector(appStateSelector);
 
   const open = () => {
     dispatch(setSideNavOpen(!sideNavOpen));
@@ -23,12 +24,11 @@ export const SideNavMenu = () => {
       ref={drawer}
       aria-labelledby="drawer-label"
     >
-      <h5
-        id="drawer-label"
-        className="inline-flex items-center mb-4 text-base font-semibold text-gray-800 dark:text-gray-400"
-      >
-        LOFTY
-      </h5>
+    <div className="bg-[#A020F0] w-1/2 p-2 rounded h-50">
+    <img src={imageSvg}/>
+
+
+    </div>
       <button
         data-drawer-hide="drawer-example"
         aria-controls="drawer-example"
@@ -47,10 +47,10 @@ export const SideNavMenu = () => {
           return (
             <li
               key={item.displayName + i}
-              className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-slate-400"
+              className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-gray-400"
             >
-              <p className={`text-slate-600 ${
-            currStepIndex === i ? "text-orange-400" : ""
+              <p className={` ${
+            currStepObj.name === item.name ? "text-[#A020F0]" : "text-slate-600"
           }`}
           onClick={() => {dispatch(setNextScript(i))}}
 

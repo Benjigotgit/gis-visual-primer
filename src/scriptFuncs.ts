@@ -24,6 +24,13 @@ export const scriptFuncs = {
 
     'setProjection': (map, currStepObj) => {
 
+        map.flyTo({
+            center:   [   -94.60745018298526,
+                36.507038565628505],
+            duration: 1500,
+            zoom: 1.6,
+          });
+
         if (map){
          
             if(currStepObj.displayName === 'Equal Earth Projection'){
@@ -61,7 +68,7 @@ export const scriptFuncs = {
         map.setStyle('mapbox://styles/mapbox/light-v11')
 
         setTimeout(() => {
-            map.addSource('maine', {
+            map.addSource('arkansas', {
                 'type': 'geojson',
                 'data': {
                     
@@ -150,12 +157,12 @@ export const scriptFuncs = {
     
     
         map.addLayer({
-            'id': 'maine',
+            'id': 'arkansas',
             'type': 'fill',
-            'source': 'maine', // reference the data source
+            'source': 'arkansas', // reference the data source
             'layout': {},
             'paint': {
-            'fill-color': '#A020F0', // blue color fill
+            'fill-color': '#A020F0', 
             'fill-opacity': 0.3
             }
             });
@@ -163,11 +170,11 @@ export const scriptFuncs = {
             map.addLayer({
             'id': 'outline',
             'type': 'line',
-            'source': 'maine',
+            'source': 'arkansas',
             'layout': {},
             'paint': {
             'line-color': 'black',
-            'line-width': 2
+            'line-width': 1
             }
             });
     
