@@ -75,4 +75,16 @@ export const script: ScriptObj[] = [
     ],
    
   },
+  {
+    name: "step7",
+    displayName: "Polygons",
+    scrollLocked: false,
+    mapInteractions: ['drawPolygon', ],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+
+    ],
+   
+  },
 ];
