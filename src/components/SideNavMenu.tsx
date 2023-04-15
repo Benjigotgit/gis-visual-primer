@@ -1,18 +1,24 @@
 import { useRef } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { script } from "../script";
-import { setSideNavOpen, setNextScript} from "../state/app/appState";
+import { setSideNavOpen } from "../state/app/appState";
 import { appStateSelector } from "../state/app/selectors";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
-import imageSvg from '../assets/image 3.svg'
+import imageSvg from "../assets/image 3.svg";
+import { scrollToScript } from "../utils/scrollToScript";
 
 export const SideNavMenu = () => {
   const drawer = useRef(null);
   const dispatch = useAppDispatch();
-  const { sideNavOpen,  currStepObj } = useAppSelector(appStateSelector);
+  const { sideNavOpen, currStepObj, scriptBlockOffsets } =
+    useAppSelector(appStateSelector);
 
   const open = () => {
     dispatch(setSideNavOpen(!sideNavOpen));
+  };
+
+  const handleClickIndex = (index: number) => {
+    scrollToScript(scriptBlockOffsets[index], true);
   };
 
   return (
@@ -24,11 +30,9 @@ export const SideNavMenu = () => {
       ref={drawer}
       aria-labelledby="drawer-label"
     >
-    <div className="bg-[#A020F0] w-1/2 p-2 rounded h-50">
-    <img src={imageSvg}/>
-
-
-    </div>
+      <div className="bg-[#A020F0] w-1/2 p-2 rounded h-50">
+        <img src={imageSvg} />
+      </div>
       <button
         data-drawer-hide="drawer-example"
         aria-controls="drawer-example"
@@ -49,13 +53,12 @@ export const SideNavMenu = () => {
               key={item.displayName + i}
               className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-gray-400"
             >
-              <p className={` ${
-            currStepObj.name === item.name ? "text-[#A020F0]" : "text-slate-600"
-          }`}
-          onClick={() => {dispatch(setNextScript(i))}}
-
-          
-          >
+              <p
+                className={` ${
+                  currStepObj?.name === item?.name ? "text-[#A020F0]" : "text-slate-600"
+                }`}
+                onClick={() => handleClickIndex(i)}
+              >
                 {i + 1}. {item.displayName}
               </p>
             </li>

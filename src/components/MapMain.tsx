@@ -1,29 +1,26 @@
 import mapboxgl from "mapbox-gl";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { appStateSelector } from "../state/app/selectors";
-import { scriptFuncs } from "../scriptFuncs";
-import type { Map } from "mapbox-gl";
-import type { Ref, MutableRefObject } from "react";
-import type { ScriptObj } from "../types/script";
 import { script } from "../script";
-import { bbox, FeatureCollection } from "@turf/turf";
-import { BBox2d } from "@turf/helpers/dist/js/lib/geojson";
+import { FeatureCollection } from "@turf/turf";
 import { setNextScript } from "../state/app/appState";
+import { scrollToScript } from "../utils/scrollToScript";
+import { runScriptFuncs } from "../utils/runScriptFuncs";
+
+import type { Map, Marker } from "mapbox-gl";
+import type { Ref, MutableRefObject } from "react";
 
 export const emptyFeatureCollection: FeatureCollection<any> = {
   type: "FeatureCollection",
   features: [],
 };
+const markers: Marker[] = [];
 
 export const MapMain = () => {
-  const dispatch = useAppDispatch()
-  const [zoom, setZoom] = useState(1);
-  //starting coords are lofty hq
-  const [lng, setLng] = useState(0);
-  const [lat, setLat] = useState(0);
-  const [selectedGeojson, setSelectedGeojson] = useState(emptyFeatureCollection);
-  const { currStepIndex, currStepObj, sideNavOpen } = useAppSelector(appStateSelector);
+  const dispatch = useAppDispatch();
+  const { currStepIndex, currStepObj, sideNavOpen, scriptBlockOffsets } =
+    useAppSelector(appStateSelector);
 
   const map: MutableRefObject<Map | null> = useRef(null);
   const mapContainer: Ref<HTMLDivElement> = useRef(null);
@@ -34,84 +31,29 @@ export const MapMain = () => {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/light-v11",
-        center: [lng, lat],
-        zoom: zoom,
+        center: [0, 0],
+        zoom: 1,
         accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
         interactive: true,
         attributionControl: false,
         scrollZoom: false,
-        
       });
-      map.current.flyTo({
-        center: [-94.15727, 36.07727],
-        duration: 1500,
-        zoom: 2.2,
-      });
-    } else {
- 
+      window.mapRef = map.current;
+      runScriptFuncs(map.current, currStepObj, markers);
     }
-
   }, [sideNavOpen]);
 
-
   useEffect(() => {
- 
-    if(
-      script.length >= currStepIndex + 1
-     )
-      {   
-if(map.current){
-   
-
-  map.current.on('click', (e) => {
-
- 
-      dispatch(setNextScript(currStepIndex + 1))
-  
-  })
-
-  currStepObj.mapInteractions.forEach((interaction) => {
-    scriptFuncs[interaction](map.current, currStepObj)
-
-    
-  })
-
-}
+    if (script.length >= currStepIndex + 1) {
+      if (window.mapRef) {
+        window.mapRef.on("click", (e) => {
+          dispatch(setNextScript(currStepIndex + 1));
+          scrollToScript(scriptBlockOffsets[currStepIndex], true);
+        });
       }
-  }, [currStepIndex])
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 100,
-      behavior: "smooth",
-    })
-  }, [])
-
-
-useEffect(() => {
-  addEventListener('scroll', () => {
-    console.log(window.scrollY)
-  
-  })
-
-
-
-}, [])
-
-  const handleNextStep = (obj: ScriptObj) => {
-    if (!map.current) return;
-    const { flyToCoords, geojsonToRender, mapInteractions } = obj;
-
-    if (flyToCoords) {
-      const bb = bbox(selectedGeojson) as BBox2d;
-      map.current.fitBounds(bb, {
-        duration: 800,
-        padding: 50,
-        zoom: 9,
-      });
+      dispatch(setNextScript(currStepIndex));
     }
-  };
+  }, []);
 
   return (
     <>
