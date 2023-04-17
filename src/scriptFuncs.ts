@@ -162,30 +162,30 @@ export const scriptFuncs = {
         "source-layer": "raster_transform-aqck0j",
       });
 
-      // Add a new layer to visualize the polygon.
-      map.addSource('contour_line', {
-        type: 'vector',
-        // Use any Mapbox-hosted tileset using its tileset id.
-        // Learn more about where to find a tileset id:
-        // https://docs.mapbox.com/help/glossary/tileset-id/
-        url: 'mapbox://mayapapaya7.bo7g3v48'
-        });
-        map.addLayer(
-        {
-        'id': 'contour_transform-2835n5',
-        'type': 'line',
-        'source': 'contour_line',
-        'source-layer': 'contour_transform-2835n5',
-        'paint': {
-        'line-color': '#A020F0',
-        'line-width': 3
-        }
-        },
-        );
+      // // Add a new layer to visualize the polygon.
+      // map.addSource('contour_line', {
+      //   type: 'vector',
+      //   // Use any Mapbox-hosted tileset using its tileset id.
+      //   // Learn more about where to find a tileset id:
+      //   // https://docs.mapbox.com/help/glossary/tileset-id/
+      //   url: 'mapbox://mayapapaya7.bo7g3v48'
+      //   });
+      //   map.addLayer(
+      //   {
+      //   'id': 'contour_transform-2835n5',
+      //   'type': 'line',
+      //   'source': 'contour_line',
+      //   'source-layer': 'contour_transform-2835n5',
+      //   'paint': {
+      //   'line-color': '#A020F0',
+      //   'line-width': 1
+      //   }
+      //   },
+      //   );
       map.flyTo({
         center: [-94.008, 36.085],
         duration: 1500,
-        zoom: 16,
+        zoom: 14,
       });
     }, 1000);
   },
