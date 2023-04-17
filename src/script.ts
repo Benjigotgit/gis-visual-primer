@@ -79,7 +79,7 @@ export const script: ScriptObj[] = [
   },
   {
     name: "step8",
-    displayName: "Satellite Imagery Basemap",
+    displayName: "Satellite Basemap",
     scrollLocked: false,
     mapInteractions: ["setBaseMap"],
     mapInteractionArgs: "satellite-streets-v12",
@@ -89,7 +89,7 @@ export const script: ScriptObj[] = [
   },
   {
     name: "step9",
-    displayName: "Vector & Raster Data",
+    displayName: "Types of GIS Data",
     scrollLocked: false,
     mapInteractions: ["drawPolygon"],
     geojsonToRender: null,
@@ -102,7 +102,7 @@ export const script: ScriptObj[] = [
     name: "step10",
     displayName: "Vector Layers",
     scrollLocked: false,
-    mapInteractions: [],
+    mapInteractions: ["addContourLine"],
     geojsonToRender: null,
     flyToCoords: false,
     text: ["Vector data includes points, lines and polygons."],
@@ -111,7 +111,7 @@ export const script: ScriptObj[] = [
     name: "step11",
     displayName: "Raster Layers",
     scrollLocked: false,
-    mapInteractions: [],
+    mapInteractions: ["addRaster"],
     geojsonToRender: null,
     flyToCoords: false,
     text: [
