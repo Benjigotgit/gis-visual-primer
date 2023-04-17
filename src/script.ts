@@ -118,4 +118,15 @@ export const script: ScriptObj[] = [
       "Raster data includes any pixelated/grid data where each pixel represents a different geographic location and unique data value.",
     ],
   },
+  {
+    name: "step12",
+    displayName: "Raster Layers",
+    scrollLocked: false,
+    mapInteractions: ["addRasterAndVector"],
+    geojsonToRender: null,
+    flyToCoords: false,
+    text: [
+      "This DEM raster data is actually used to generate contour lines.",
+    ],
+  },
 ];
