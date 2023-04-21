@@ -1,11 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { script } from "../../script";
 import { AppState } from "../../types/state";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { Marker, Map } from "mapbox-gl";
 
 const initialState: AppState = {
   currStepIndex: 0,
   currStepObj: script[0],
   sideNavOpen: true,
+  scroll: 0,
+  scriptBlockOffsets: [],
+  markers: [],
 };
 
 export const appSlice = createSlice({
@@ -13,19 +19,33 @@ export const appSlice = createSlice({
   name: "appState",
   reducers: {
     setNextScript: (state, action: PayloadAction<number>) => {
-      try{
+      try {
         state.currStepIndex = action.payload;
         state.currStepObj = script[action.payload];
-      } catch {
-        
-      }
-        
+      } catch {}
     },
     setSideNavOpen: (state, action: PayloadAction<boolean>) => {
-      console.log("ok", action.payload);
       state.sideNavOpen = action.payload;
+    },
+    setScriptBlockOffsets: (state, action: PayloadAction<number[]>) => {
+      state.scriptBlockOffsets = action.payload;
+    },
+    setMarkers: (state, action: PayloadAction<Marker>) => {
+      state.markers = [...state.markers, action.payload];
+    },
+    removeMarkers: (state, action: PayloadAction<Map>) => {
+      state.markers.forEach((marker) => {
+        marker.remove();
+      });
+      state.markers = [];
     },
   },
 });
 
-export const { setNextScript, setSideNavOpen } = appSlice.actions;
+export const {
+  setNextScript,
+  setSideNavOpen,
+  setScriptBlockOffsets,
+  setMarkers,
+  removeMarkers,
+} = appSlice.actions;

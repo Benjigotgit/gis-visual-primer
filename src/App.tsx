@@ -6,6 +6,8 @@ import { TopicContainer } from "./components/TopicContainer";
 import { SideNavMenu } from "./components/SideNavMenu";
 import { store } from "./state/store";
 
+import type { Map } from "mapbox-gl";
+
 export default () => {
   return (
     <Provider store={store}>
@@ -17,3 +19,11 @@ export default () => {
     </Provider>
   );
 };
+
+declare global {
+  interface Window {
+    mapRef: Map | null;
+  }
+}
+
+window.mapRef;
