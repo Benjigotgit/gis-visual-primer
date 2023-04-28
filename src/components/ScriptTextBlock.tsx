@@ -14,17 +14,18 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
   const { currStepObj } = useAppSelector(appStateSelector);
 
   return (
-    <div className="z-40 pointer-events-auto">
-      <div className="bg-gradient-to-t opacity-75 text-center from-[#A020F0] to-transparent w-screen h-8 " />
+    <div className="z-40 pointer-events-auto  relative h-fit  ">
+      <div className="bg-gradient-to-t from-[#a01ff0bb] to-transparent w-screen h-6 " />
+
       <div
         ref={ref}
-        className="h-fit text-center py-8 bg-opacity-75 flex flex-col items-center justify-evenly  bg-[#A020F0] w-screen z-10"
+        className="h-fit py-8  flex flex-col   bg-[#a01ff0bb] items-center justify-evenly  w-screen z-10"
       >
-        <p className="text-center w-1/2 text-white my-10">
+        <p className="text-center w-1/2 text-white font-semibold my-10 tracking-[0.3px]">
           {currStepObj ? item.text : ""}
         </p>
       </div>
-      <div className="bg-gradient-to-b from-[#A020F0] opacity-75 to-transparent w-screen h-8" />
+      <div className="bg-gradient-to-b from-[#A020F0bb] relative to-transparent w-screen h-6" />
     </div>
   );
 });

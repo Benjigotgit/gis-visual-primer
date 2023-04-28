@@ -15,7 +15,24 @@ export const runScriptFuncs = (map: Map, scriptObj: ScriptObj, markers: Marker[]
       case "removePoints":
         scriptFuncs[interaction](markers);
         break;
+
       case "addPOIS":
+          scriptFuncs[interaction](map, scriptObj);
+          break;
+      case "addContourLine":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
+      case "addRaster":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
+      case "addDEM":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
+
+      case "flyTo":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
+      case "drawLine":
         scriptFuncs[interaction](map, scriptObj);
         break;
       case "setProjection":

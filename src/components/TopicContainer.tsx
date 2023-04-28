@@ -29,7 +29,7 @@ export const TopicContainer = () => {
   const ref = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
 
-  const { currStepIndex, scriptBlockOffsets, currStepObj } =
+  const { currStepIndex, scriptBlockOffsets, currStepObj, sideNavOpen } =
     useAppSelector(appStateSelector);
 
   const handleScroll = () => {
@@ -76,7 +76,9 @@ export const TopicContainer = () => {
   return (
     <ul
       ref={ref}
-      className="absolute top-0 h-fit pointer-events-none  flex flex-col z-10 "
+      className={`absolute top-0 h-fit pointer-events-none transition duration-300 flex flex-col z-10 ${
+        sideNavOpen ? "translate-x-28" : ""
+      }`}
     >
       {script.map((item, index) => (
         <li key={`${index}-${Math.random()}`}>

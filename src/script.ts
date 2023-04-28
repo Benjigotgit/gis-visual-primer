@@ -52,7 +52,7 @@ export const script: ScriptObj[] = [
       zoom: 6.2,
     },
     text: [
-      "The Mercator projection system is often used for navigation. Web mercator was developed for web mapping!",
+      "The Mercator projection system is often used for navigation. Web Mercator was developed for web mapping!",
     ],
   },
   {
@@ -121,32 +121,26 @@ export const script: ScriptObj[] = [
     mapInteractions: ["drawPoint"],
     text: ["Points: Helpful for showing distinct data locations such as Lofty HQ. "],
   },
-  // Temporary line example, we could populate this with something more interesting like street data!
   {
     name: "step11",
     displayName: "Lines",
     scrollLocked: false,
-    mapInteractions: ["drawLine"],
-    geojsonToRender: {
-      type: "Feature",
-      properties: {},
-      geometry: {
-        type: "LineString",
-        coordinates: [
-          [-94.048626, 35.847524],
-          [-90.818646, 34.816831],
-        ],
-      },
+    mapInteractions: ["flyTo", "drawLine"],
+    flyToOptions: {
+      zoom: 9,
     },
     text: [
-      "Lines: Helpful for showing linear features like streets, rivers, or trails. Or, representing the distance from one part of the state to another.",
+      "Lines: Helpful for showing linear features like streets, rivers, or trails. Here are the major roads of Arkansas!",
     ],
   },
   {
     name: "step12",
     displayName: "Polygons",
     scrollLocked: false,
-    mapInteractions: ["drawPolygon"],
+    mapInteractions: ["flyTo", "drawPolygon"],
+    flyToOptions: {
+      zoom: 6,
+    },
     geojsonToRender: {
       type: "FeatureCollection",
       features: [
@@ -183,21 +177,20 @@ export const script: ScriptObj[] = [
       "Polygons: Helpful for showing boundary areas such as the state boundary of Arkansas.",
     ],
   },
-  // TO DO: At step 13, we should remove all layers (points, lines & polygons)
   {
     name: "step13",
     displayName: "Raster Layers",
     scrollLocked: false,
-    mapInteractions: ["removePoints"],
+    mapInteractions: ["removeVectorLayers", "removePoints", "addRaster"],
     text: [
-      "Moving on to raster data, which includes any pixelated/grid data where each pixel represents a different geographic location and unique attribute value. Raster data is most commonly found in remotely sensed data, shaded relief and topographic data, satellite imagery, and aerial imagery",
+      "Moving on to raster data, which includes any pixelated/grid data where each pixel represents a different geographic location and unique attribute value. Raster data is most commonly found in remotely sensed data. This raster grid represents USGS quadrangle areas, and each cell holds unique data such as airphoto date and contour interval!",
     ],
   },
   {
     name: "step14",
     displayName: "Elevation - Raster",
     scrollLocked: false,
-    mapInteractions: ["flyTo", "addDEM"],
+    mapInteractions: ["removeRaster", "flyTo", "addDEM"],
     flyToOptions: {
       center: [-94.008, 36.085],
       zoom: 14,
@@ -230,7 +223,7 @@ export const script: ScriptObj[] = [
       zoom: 9,
     },
     text: [
-      
+      "Map features can have attributes. Here we've listed out some points of interest in Northwest Arkansas. Their atrributes are image, title, address, and description. Hover over the points to view their associated attributes."
     ],
     geojsonToRender: {
       
