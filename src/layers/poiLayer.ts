@@ -1,5 +1,4 @@
 export const PoiStyle = {
-    
         'id': 'places',
         'type': 'circle',
         'source': 'places',

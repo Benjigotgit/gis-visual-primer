@@ -232,7 +232,72 @@ export const script: ScriptObj[] = [
     text: [
       
     ],
-  },
+    geojsonToRender: {
+      
+        'type': 'FeatureCollection',
+        'features': [
+        {
+        'type': 'Feature',
+        'properties': {
+          "title": 'Mount Kessler',
+          "address":'2600 Wc 200, Fayetteville, AR 72701',
+        'description':
+        '<p>Green space featuring trails for hiking & mountain biking along with soccer & baseball fields.</p>',
+      "imageUrl": 'https://ozarkmountainhiker.files.wordpress.com/2015/03/img_6803rr.jpg'  
+      },
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [-94.2021011, 36.026428]
+        }
+        },
+        {
+        'type': 'Feature',
+        'properties': {
+          "title":"Crystal Bridges",
+          "address":"600 Museum Way, Bentonville, AR 72712",
+        "description":
+        '<p>Renowned collection ranging from Rockwell to Warhol in a striking structure set on 120 lush acres.</p>',
+      "imageUrl":"https://www.frommers.com/system/media_items/attachments/000/857/829/s980/By_Zac_Thompson.jpg?1481235914"  
+      },
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [-94.212831, 36.3826562]
+        }
+        },
+        {
+        'type': 'Feature',
+        'properties': {
+          "title":"Pea Ridge Military Park",
+          "address":"15930 National Park Dr, Garfield, AR 72732",
+        "description":
+        '<p>Pea Ridge National Military Park is a United States National Military Park located in northwest Arkansas near the Missouri border. The park protects the site of the Battle of Pea Ridge, fought March 7 and 8, 1862.</p>',
+        "imageUrl": 'https://encyclopediaofarkansas.net/wp-content/uploads/2022/08/pearidge_cannon_f.jpg'  
+   
+      },
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [-94.103416, 36.3557937]
+        }
+        },
+        {
+        'type': 'Feature',
+        'properties': {
+        "title":"Walton Arts Center",
+        "address":'495 W Dickson St, Fayetteville, AR 72701',
+        "imageUrl": 'https://wehco.media.clients.ellingtoncms.com/imports/adg/photos/198058467_BWAY-HAMILTON-JoanMarcus_ORIG_t800.jpg?90232451fbcadccc64a17de7521d859a8f88077d',
+        'description':
+        "<p>The Walton Arts Center is a performing arts center. This facility located in Fayetteville, Arkansas, is currently Arkansas’ largest and busiest arts presenter, famous for bringing great performing artists and entertainers from around the world.</p>"
+        },
+        'geometry': {
+        'type': 'Point',
+        'coordinates': [-94.1707999, 36.0698482]
+        }
+        },
+      
+        ]
+        }
+      }
+  ,
   // There is currently a bug where the last two steps in the nav do not respond to scroll/do not load data
   // As a temporary fix, leaving these two empty steps here so the other steps load properly
   {
