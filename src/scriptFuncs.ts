@@ -11,9 +11,11 @@ export type ScriptFuncKeys =
   | "drawPolygon"
   | "drawLine"
   | "flyTo"
+  | "removeVectorLayers"
   | "removePoints"
   | "addContourLine"
   | "addRaster"
+  | "removeRaster"
   | "addDEM";
 
 type ScriptFunc<T> = (map: Map, currStepObj: ScriptObj) => T;
@@ -25,9 +27,11 @@ export interface ScriptFuncs {
   drawPolygon: ScriptFunc<void>;
   drawLine: ScriptFunc<void>;
   flyTo: ScriptFunc<void>;
+  removeVectorLayers: ScriptFunc<void>;
   removePoints: (markers: Marker[]) => void;
   addContourLine: ScriptFunc<void>;
   addRaster: ScriptFunc<void>;
+  removeRaster: ScriptFunc<void>;
   addDEM: ScriptFunc<void>;
 }
 
@@ -76,21 +80,27 @@ export const scriptFuncs: ScriptFuncs = {
     }, 1000)
    
   },
+  // Temporary solution to quickly remove Polygon layer
+  removeVectorLayers: (map) => {
+    map.removeLayer("arkansas")
+    map.removeLayer("outline")
+    map.removeLayer("FUNCTIONAL_CLASS_ARDOT-1zqvuh")
+  },
 
   drawLine: (map, currStepObj) => {
-    if (!map.getSource("line-example")) {
-      map.addSource("line-example", {
-        type: "geojson",
-        data: currStepObj.geojsonToRender,
+    if (!map.getSource("FUNCTIONAL_CLASS_ARDOT-1zqvuh")) {
+      map.addSource("FUNCTIONAL_CLASS_ARDOT-1zqvuh", {
+        type: "vector",
+        url: "mapbox://mayapapaya7.c4lshk0v",
       });
       map.addLayer({
-        id: "line-example",
+        id: "FUNCTIONAL_CLASS_ARDOT-1zqvuh",
         type: "line",
-        source: "line-example",
-        layout: { "line-join": "round", "line-cap": "round" },
+        source: "FUNCTIONAL_CLASS_ARDOT-1zqvuh",
+        "source-layer": "FUNCTIONAL_CLASS_ARDOT-1zqvuh",
         paint: {
           "line-color": "black",
-          "line-width": 3,
+          "line-width": 2,
         },
       });
     } else {
@@ -155,19 +165,28 @@ export const scriptFuncs: ScriptFuncs = {
       },
     });
   },
-  // TO DO: find some usable raster layer to show off at step 13, not getting this one to load right
+
   addRaster: (map) => {
-    map.addSource("NAIP-b3u5r5", {
-      type: "raster",
-      url: "mapbox://mayapapaya7.d05dt6bm",
+    map.addSource("DRG_24K_METADATA_USGS-9p40z1", {
+      type: "vector",
+      url: "mapbox://mayapapaya7.ds1rm1ei",
     });
     map.addLayer({
-      id: "NAIP-b3u5r5",
-      type: "raster",
-      source: "NAIP-b3u5r5",
-      "source-layer": "NAIP-b3u5r5",
+      id: "DRG_24K_METADATA_USGS-9p40z1",
+      type: "line",
+      source: "DRG_24K_METADATA_USGS-9p40z1",
+      "source-layer": "DRG_24K_METADATA_USGS-9p40z1",
+      paint: {
+        "line-color": "#A020F0",
+        "line-width": 1,
+      },
     });
   },
+
+  removeRaster: (map) => {
+    map.removeLayer("DRG_24K_METADATA_USGS-9p40z1")
+  },
+
   addDEM: (map) => {
     map.addSource("raster_transform-aqck0j", {
       type: "raster",
