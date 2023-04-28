@@ -45,14 +45,13 @@ export const scriptFuncs: ScriptFuncs = {
   },
 
   drawPolygon: (map, currStepObj) => {
-
     setTimeout(() => {
       if (!map.getSource("arkansas")) {
         map.addSource("arkansas", {
           type: "geojson",
           data: currStepObj.geojsonToRender,
         });
-  
+
         // Add a new layer to visualize the polygon.
         map.addLayer({
           id: "arkansas",
@@ -77,14 +76,13 @@ export const scriptFuncs: ScriptFuncs = {
         });
       } else {
       }
-    }, 1000)
-   
+    }, 1000);
   },
   // Temporary solution to quickly remove Polygon layer
   removeVectorLayers: (map) => {
-    map.removeLayer("arkansas")
-    map.removeLayer("outline")
-    map.removeLayer("FUNCTIONAL_CLASS_ARDOT-1zqvuh")
+    map.removeLayer("arkansas");
+    map.removeLayer("outline");
+    map.removeLayer("FUNCTIONAL_CLASS_ARDOT-1zqvuh");
   },
 
   drawLine: (map, currStepObj) => {
@@ -184,7 +182,7 @@ export const scriptFuncs: ScriptFuncs = {
   },
 
   removeRaster: (map) => {
-    map.removeLayer("DRG_24K_METADATA_USGS-9p40z1")
+    map.removeLayer("DRG_24K_METADATA_USGS-9p40z1");
   },
 
   addDEM: (map) => {
