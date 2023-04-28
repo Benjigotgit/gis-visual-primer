@@ -18,8 +18,7 @@ export type ScriptFuncKeys =
   | "addRaster"
   | "addDEM"
   | "addPOIS"
-  | "removeRaster"
- 
+  | "removeRaster";
 
 type ScriptFunc<T> = (map: Map, currStepObj: ScriptObj) => T;
 
@@ -84,9 +83,15 @@ export const scriptFuncs: ScriptFuncs = {
   },
   // Temporary solution to quickly remove Polygon layer
   removeVectorLayers: (map) => {
-    map.removeLayer("arkansas");
-    map.removeLayer("outline");
-    map.removeLayer("FUNCTIONAL_CLASS_ARDOT-1zqvuh");
+    if (map.getSource("arkansas")) {
+      map.removeLayer("arkansas");
+    }
+    if (map.getSource("outline")) {
+      map.removeLayer("outline");
+    }
+    if (map.getSource("FUNCTIONAL_CLASS_ARDOT-1zqvuh")) {
+      map.removeLayer("FUNCTIONAL_CLASS_ARDOT-1zqvuh");
+    }
   },
 
   drawLine: (map, currStepObj) => {
@@ -143,29 +148,34 @@ export const scriptFuncs: ScriptFuncs = {
   },
 
   removePoints: (markers: Marker[]) => {
-    markers.forEach((marker) => {
-      marker.remove();
-    });
-    while (markers.length) {
-      markers.pop();
+    if (markers) {
+      markers.forEach((marker) => {
+        marker.remove();
+      });
+      while (markers.length) {
+        markers.pop();
+      }
     }
+    return;
   },
 
   addContourLine: (map) => {
-    map.addSource("contour_line", {
-      type: "vector",
-      url: "mapbox://mayapapaya7.bo7g3v48",
-    });
-    map.addLayer({
-      id: "contour_transform-2835n5",
-      type: "line",
-      source: "contour_line",
-      "source-layer": "contour_transform-2835n5",
-      paint: {
-        "line-color": "#A020F0",
-        "line-width": 1,
-      },
-    });
+    if (!map.getSource("contour_line")) {
+      map.addSource("contour_line", {
+        type: "vector",
+        url: "mapbox://mayapapaya7.bo7g3v48",
+      });
+      map.addLayer({
+        id: "contour_transform-2835n5",
+        type: "line",
+        source: "contour_line",
+        "source-layer": "contour_transform-2835n5",
+        paint: {
+          "line-color": "#A020F0",
+          "line-width": 1,
+        },
+      });
+    }
   },
 
   addRaster: (map) => {
@@ -186,7 +196,9 @@ export const scriptFuncs: ScriptFuncs = {
   },
 
   removeRaster: (map) => {
-    map.removeLayer("DRG_24K_METADATA_USGS-9p40z1");
+    if (map.getSource("DRG_24K_METADATA_USGS-9p40z1")) {
+      map.removeLayer("DRG_24K_METADATA_USGS-9p40z1");
+    }
   },
 
   addDEM: (map) => {
@@ -202,45 +214,39 @@ export const scriptFuncs: ScriptFuncs = {
     });
   },
   addPOIS: (map, currStepObj) => {
-  
+    map.addSource("places", {
+      type: "geojson",
+      data: currStepObj.geojsonToRender,
+    });
+    // Add a layer showing the places.
+    map.addLayer(PoiStyle);
 
-    map.addSource('places', {
-      'type': 'geojson',
-      'data': currStepObj.geojsonToRender
-      });
-      // Add a layer showing the places.
-      map.addLayer(PoiStyle);
+    const popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false,
+    });
 
-      const popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-        });
+    map.on("mouseenter", "places", (e) => {
+      // Change the cursor style as a UI indicator.
+      map.getCanvas().style.cursor = "pointer";
 
-      map.on('mouseenter', 'places', (e) => {
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
-
-        
-         
-        // Copy coordinates array.
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const description = `<img width="100" src="${e.features[0].properties.imageUrl}"/><br/>
+      // Copy coordinates array.
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const description = `<img width="100" src="${e.features[0].properties.imageUrl}"/><br/>
         <strong>${e.features[0].properties.title}</strong><br/>
         <h5>${e.features[0].properties.address}</h5>
         ${e.features[0].properties.description}`;
-         
-    
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-         
-    
-        popup.setLngLat(coordinates).setHTML(description).addTo(map);
-        });
-         
-        map.on('mouseleave', 'places', () => {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-        });
-  }
+      }
+
+      popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on("mouseleave", "places", () => {
+      map.getCanvas().style.cursor = "";
+      popup.remove();
+    });
+  },
 };

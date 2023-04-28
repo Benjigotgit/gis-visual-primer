@@ -5,7 +5,7 @@ export const script: ScriptObj[] = [
     name: "place_starting_pin",
     displayName: "Getting Started",
     scrollLocked: true,
-    mapInteractions: ["setBaseMap", "flyTo"],
+    mapInteractions: ["removePoints", "removeRaster", "removeVectorLayers", "setBaseMap", "flyTo"],
     flyToOptions: {
       center: [-94.15727, 36.07727],
       zoom: 2.2,

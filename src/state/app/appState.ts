@@ -39,6 +39,14 @@ export const appSlice = createSlice({
       });
       state.markers = [];
     },
+    resetState: (state, action) => {
+      state.currStepIndex = 0;
+      state.currStepObj = script[0];
+      state.sideNavOpen = true;
+      state.scroll = 0;
+      state.scriptBlockOffsets = [];
+      state.markers = [];
+    },
   },
 });
 
@@ -48,4 +56,5 @@ export const {
   setScriptBlockOffsets,
   setMarkers,
   removeMarkers,
+  resetState,
 } = appSlice.actions;

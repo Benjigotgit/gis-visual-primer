@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { appStateSelector } from "../state/app/selectors";
 import { script } from "../script";
 import { FeatureCollection } from "@turf/turf";
-import { setNextScript } from "../state/app/appState";
+import { setNextScript, resetState } from "../state/app/appState";
 import { scrollToScript } from "../utils/scrollToScript";
 import { runScriptFuncs } from "../utils/runScriptFuncs";
 
@@ -25,14 +25,17 @@ export const MapMain = () => {
   const map: MutableRefObject<Map | null> = useRef(null);
   const mapContainer: Ref<HTMLDivElement> = useRef(null);
   const handleReload = () => {
-    console.log("loading");
-    // window.location.reload();
+    window.scrollTo({
+      top: 100,
+      left: 100,
+      behavior: "smooth",
+    })
+    dispatch(resetState)
   };
 
   useEffect(() => {
-    const listener = window.addEventListener("load", handleReload);
-    () => listener;
-  });
+    handleReload();
+  }, [])
 
   useEffect(() => {
     if (!mapContainer.current) return;
