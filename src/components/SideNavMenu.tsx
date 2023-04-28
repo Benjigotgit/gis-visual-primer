@@ -46,18 +46,22 @@ export const SideNavMenu = () => {
           }`}
         />
       </button>
-      <ul className="flex flex-col justify-start w-full items-center">
+      <ul
+        className={`flex flex-col justify-start w-full items-center ${
+          !sideNavOpen ? "-translate-x-10" : ""
+        }`}
+      >
         {script.map((item, i) => {
           return (
             <li
               key={item.displayName + i}
-              className="flex flex-row justify-start items-center w-full h-10 transition hover:bg-gray-400"
+              className="flex flex-row justify-start items-center w-full h-10 transition duration-300 hover:cursor-pointer hover:bg-gray-400"
+              onClick={() => handleClickIndex(i)}
             >
               <p
                 className={` ${
                   currStepObj?.name === item?.name ? "text-[#A020F0]" : "text-slate-600"
                 }`}
-                onClick={() => handleClickIndex(i)}
               >
                 {i + 1}. {item.displayName}
               </p>
