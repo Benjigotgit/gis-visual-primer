@@ -24,6 +24,15 @@ export const MapMain = () => {
 
   const map: MutableRefObject<Map | null> = useRef(null);
   const mapContainer: Ref<HTMLDivElement> = useRef(null);
+  const handleReload = () => {
+    console.log("loading");
+    // window.location.reload();
+  };
+
+  useEffect(() => {
+    const listener = window.addEventListener("load", handleReload);
+    () => listener;
+  });
 
   useEffect(() => {
     if (!mapContainer.current) return;
