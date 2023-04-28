@@ -15,6 +15,10 @@ export const runScriptFuncs = (map: Map, scriptObj: ScriptObj, markers: Marker[]
       case "removePoints":
         scriptFuncs[interaction](markers);
         break;
+
+      case "addPOIS":
+          scriptFuncs[interaction](map, scriptObj);
+          break;
       case "addContourLine":
         scriptFuncs[interaction](map, scriptObj);
         break;

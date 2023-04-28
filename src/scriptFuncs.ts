@@ -3,6 +3,7 @@ import axios from "axios";
 
 import type { ScriptObj } from "./types/script";
 import type { Map, Marker } from "mapbox-gl";
+import { PoiStyle } from "./layers/poiLayer";
 
 export type ScriptFuncKeys =
   | "drawPoint"
@@ -15,8 +16,10 @@ export type ScriptFuncKeys =
   | "removePoints"
   | "addContourLine"
   | "addRaster"
+  | "addDEM"
+  | "addPOIS"
   | "removeRaster"
-  | "addDEM";
+ 
 
 type ScriptFunc<T> = (map: Map, currStepObj: ScriptObj) => T;
 
@@ -33,6 +36,7 @@ export interface ScriptFuncs {
   addRaster: ScriptFunc<void>;
   removeRaster: ScriptFunc<void>;
   addDEM: ScriptFunc<void>;
+  addPOIS: ScriptFunc<void>;
 }
 
 export const scriptFuncs: ScriptFuncs = {
@@ -197,4 +201,46 @@ export const scriptFuncs: ScriptFuncs = {
       "source-layer": "raster_transform-aqck0j",
     });
   },
+  addPOIS: (map, currStepObj) => {
+  
+
+    map.addSource('places', {
+      'type': 'geojson',
+      'data': currStepObj.geojsonToRender
+      });
+      // Add a layer showing the places.
+      map.addLayer(PoiStyle);
+
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+        });
+
+      map.on('mouseenter', 'places', (e) => {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+
+        
+         
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = `<img width="100" src="${e.features[0].properties.imageUrl}"/><br/>
+        <strong>${e.features[0].properties.title}</strong><br/>
+        <h5>${e.features[0].properties.address}</h5>
+        ${e.features[0].properties.description}`;
+         
+    
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+         
+    
+        popup.setLngLat(coordinates).setHTML(description).addTo(map);
+        });
+         
+        map.on('mouseleave', 'places', () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+        });
+  }
 };
