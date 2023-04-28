@@ -20,7 +20,7 @@ export const ScriptTextBlock = memo(({ item, index }: IScriptTextItem) => {
         ref={ref}
         className="h-fit text-center py-8 bg-opacity-75 flex flex-col items-center justify-evenly  bg-[#A020F0] w-screen z-10"
       >
-        <p className="text-center w-1/2 text-white mb-10">
+        <p className="text-center w-1/2 text-white my-10">
           {currStepObj ? item.text : ""}
         </p>
       </div>

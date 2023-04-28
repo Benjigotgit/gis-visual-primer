@@ -3,6 +3,7 @@ import axios from "axios";
 
 import type { ScriptObj } from "./types/script";
 import type { Map, Marker } from "mapbox-gl";
+import { PoiStyle } from "./layers/poiLayer";
 
 export type ScriptFuncKeys =
   | "drawPoint"
@@ -14,7 +15,8 @@ export type ScriptFuncKeys =
   | "removePoints"
   | "addContourLine"
   | "addRaster"
-  | "addDEM";
+  | "addDEM"
+  | "addPOIS";
 
 type ScriptFunc<T> = (map: Map, currStepObj: ScriptObj) => T;
 
@@ -29,6 +31,7 @@ export interface ScriptFuncs {
   addContourLine: ScriptFunc<void>;
   addRaster: ScriptFunc<void>;
   addDEM: ScriptFunc<void>;
+  addPOIS: ScriptFunc<void>;
 }
 
 export const scriptFuncs: ScriptFuncs = {
@@ -180,4 +183,106 @@ export const scriptFuncs: ScriptFuncs = {
       "source-layer": "raster_transform-aqck0j",
     });
   },
+  addPOIS: (map, currStepObj) => {
+  
+
+    map.addSource('places', {
+      'type': 'geojson',
+      'data': {
+      'type': 'FeatureCollection',
+      'features': [
+      {
+      'type': 'Feature',
+      'properties': {
+        "title": 'Mount Kessler',
+      'description':
+      '<p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
+    "imageUrl": 'https://ozarkmountainhiker.files.wordpress.com/2015/03/img_6803rr.jpg'  
+    },
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [-94.2021011, 36.026428]
+      }
+      },
+      {
+      'type': 'Feature',
+      'properties': {
+        "title":"Crystal Bridges",
+      'description':
+      '<p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a Mad Men Season Five Finale Watch Party, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>',
+    "imageUrl":"https://www.frommers.com/system/media_items/attachments/000/857/829/s980/By_Zac_Thompson.jpg?1481235914"  
+    },
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [-94.212831, 36.3826562]
+      }
+      },
+      {
+      'type': 'Feature',
+      'properties': {
+        "title":"Pea Ridge Military Park",
+      'description':
+      '<p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a Big Backyard Beach Bash and Wine Fest on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.</p>',
+      "imageUrl": 'https://ozarkmountainhiker.files.wordpress.com/2015/03/img_6803rr.jpg'  
+ 
+    },
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [-94.103416, 36.3557937]
+      }
+      },
+      {
+      'type': 'Feature',
+      'properties': {
+      "title":"Walton Arts Center",
+      "imageUrl": 'https://wehco.media.clients.ellingtoncms.com/imports/adg/photos/198058467_BWAY-HAMILTON-JoanMarcus_ORIG_t800.jpg?90232451fbcadccc64a17de7521d859a8f88077d',
+      'description':
+      "<p>The Arlington Players' production of Stephen Sondheim's <em>A Little Night Music</em> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>"
+      },
+      'geometry': {
+      'type': 'Point',
+      'coordinates': [-94.1707999, 36.0698482]
+      }
+      },
+    
+      ]
+      }
+      });
+      // Add a layer showing the places.
+      map.addLayer(PoiStyle);
+
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+        });
+
+      map.on('mouseenter', 'places', (e) => {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+
+        
+         
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = `<img width="100" src="${e.features[0].properties.imageUrl}"/><br/>
+        <strong>${e.features[0].properties.title}</strong><br/>
+        ${e.features[0].properties.description}`;
+         
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+         
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(description).addTo(map);
+        });
+         
+        map.on('mouseleave', 'places', () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+        });
+  }
 };

@@ -219,6 +219,20 @@ export const script: ScriptObj[] = [
       "Contour lines are created by generating polylines that connect points of equal elevation within a DEM raster dataset",
     ],
   },
+
+  {
+    name: "step16",
+    displayName: "Features and Attributes",
+    scrollLocked: false,
+    mapInteractions: ["flyTo", "addPOIS"],
+    flyToOptions: {
+      center: [-94.008, 36.085],
+      zoom: 9,
+    },
+    text: [
+      
+    ],
+  },
   // There is currently a bug where the last two steps in the nav do not respond to scroll/do not load data
   // As a temporary fix, leaving these two empty steps here so the other steps load properly
   {
