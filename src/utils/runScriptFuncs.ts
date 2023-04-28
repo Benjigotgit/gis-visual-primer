@@ -15,6 +15,13 @@ export const runScriptFuncs = (map: Map, scriptObj: ScriptObj, markers: Marker[]
       case "removePoints":
         scriptFuncs[interaction](markers);
         break;
+
+      case "setProjection":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
+      case "drawPolygon":
+        scriptFuncs[interaction](map, scriptObj);
+        break;
       default:
         scriptFuncs[interaction](map, scriptObj);
     }

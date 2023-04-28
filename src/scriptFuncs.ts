@@ -41,36 +41,40 @@ export const scriptFuncs: ScriptFuncs = {
   },
 
   drawPolygon: (map, currStepObj) => {
-    if (!map.getSource("arkansas")) {
-      map.addSource("arkansas", {
-        type: "geojson",
-        data: currStepObj.geojsonToRender,
-      });
 
-      // Add a new layer to visualize the polygon.
-      map.addLayer({
-        id: "arkansas",
-        type: "fill",
-        source: "arkansas", // reference the data source
-        layout: {},
-        paint: {
-          "fill-color": "#A020F0",
-          "fill-opacity": 0.3,
-        },
-      });
-      // Add a black outline around the polygon.
-      map.addLayer({
-        id: "outline",
-        type: "line",
-        source: "arkansas",
-        layout: {},
-        paint: {
-          "line-color": "black",
-          "line-width": 1,
-        },
-      });
-    } else {
-    }
+    setTimeout(() => {
+      if (!map.getSource("arkansas")) {
+        map.addSource("arkansas", {
+          type: "geojson",
+          data: currStepObj.geojsonToRender,
+        });
+  
+        // Add a new layer to visualize the polygon.
+        map.addLayer({
+          id: "arkansas",
+          type: "fill",
+          source: "arkansas", // reference the data source
+          layout: {},
+          paint: {
+            "fill-color": "#A020F0",
+            "fill-opacity": 0.3,
+          },
+        });
+        // Add a black outline around the polygon.
+        map.addLayer({
+          id: "outline",
+          type: "line",
+          source: "arkansas",
+          layout: {},
+          paint: {
+            "line-color": "black",
+            "line-width": 1,
+          },
+        });
+      } else {
+      }
+    }, 1000)
+   
   },
 
   drawLine: (map, currStepObj) => {
